@@ -12,9 +12,9 @@
 
 GCC = GCC
 
-NAME = fdf
+NAME = miniRT
 
-SRCS = ft_utils.c ft_err.c ft_map.c ft_map_utils.c ft_map_utils_2.c ft_split.c ft_free.c ft_write_map.c ft_write_map_utils.c ft_hook.c ft_hook_utils.c
+SRCS =
 
 G_N_L = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
 
@@ -43,9 +43,9 @@ fclean: clean
 
 re: fclean all
 
-test: $(OBJS) $(OBJS_G_N_L)
-	$(GCC) -Wall -Werror -Wextra main.c ./*.o get_next_line/*.o -o $(NAME)
+# test: $(OBJS) $(OBJS_G_N_L)
+# 	$(GCC) -Wall -Werror -Wextra main.c ./*.o get_next_line/*.o -o $(NAME)
 
-retest: fclean test
+# retest: fclean test
 
 .PHONY: all clean fclean re
