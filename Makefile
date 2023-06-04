@@ -14,7 +14,7 @@ GCC = GCC
 
 NAME = miniRT
 
-SRCS =
+SRCS = map.c
 
 G_N_L = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
 
