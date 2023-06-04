@@ -23,6 +23,18 @@
 
 # define HORIZON 1280
 # define VERTICAL 720
+# define ESC 53
+
+typedef struct s_mlx
+{
+	void	*mlx;
+	void	*mlx_win;
+	void	*img;
+	char	*addr;
+	int		bits;
+	int		line;
+	int		endian;
+}	t_mlx;
 
 void	ft_write_map(char *name);
 

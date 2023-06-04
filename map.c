@@ -12,24 +12,34 @@
 
 #include "miniRT.h"
 
+void	ft_close(t_mlx *mlx)
+{
+	mlx_destroy_window(mlx->mlx, mlx->mlx_win);
+	mlx_destroy_image(mlx->mlx, mlx->img);
+	exit (0);
+}
+
+void	ft_key_hook(int key, t_mlx *mlx)
+{
+	if (key == ESC)
+		ft_close(mlx);
+}
+
 void	ft_write_map(char *name)
 {
-	void	*mlx;
-	void	*mlx_win;
-	void	*img;
-	char	*addr; // for point color
-	int		bits;
-	int		line;
-	int		endian;
+	t_mlx	mlx;
 
     // create window of put image
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, HORIZON, VERTICAL, name);
+	mlx.mlx = mlx_init();
+	mlx.mlx_win = mlx_new_window(mlx.mlx, HORIZON, VERTICAL, name);
     // create image
-	img = mlx_new_image(mlx, HORIZON, VERTICAL);
-	addr = mlx_get_data_addr(img, &bits, &line, &endian);
+	mlx.img = mlx_new_image(mlx.mlx, HORIZON, VERTICAL);
+	mlx.addr = mlx_get_data_addr(mlx.img, &mlx.bits, &mlx.line, &mlx.endian);
     // push image to window
-	mlx_put_image_to_window(mlx, mlx_win, img, 0, 0);
+	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.img, 0, 0);
+	// close window
+	mlx_key_hook(mlx.mlx_win, ft_key_hook, &mlx);
+	mlx_hook(mlx.mlx_win, 17, 0L, ft_close, &mlx);
     // loop image show
-	mlx_loop(mlx);
+	mlx_loop(mlx.mlx);
 }
