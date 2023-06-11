@@ -14,9 +14,11 @@
 
 int	main(int ac, char **av)
 {
+	t_info	info;
+
 	if (ac == 2)
 	{
-		ft_write_map(av[1]);
+		ft_data(&info, av[1]);
 	}
 	else
 		write(2, "Error\n", 6);
