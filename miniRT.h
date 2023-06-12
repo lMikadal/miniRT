@@ -91,6 +91,9 @@ typedef struct s_info
 	t_cylinder	*cylinder;
 }	t_info;
 
+void	ft_free_2d(char **s);
+char	**ft_split(char const *s, char c);
+int		ft_strlen(char const *s);
 void	ft_data(t_info *info, char *file);
 
 // void	ft_write_map(char *name);
