@@ -92,8 +92,10 @@ typedef struct s_info
 }	t_info;
 
 void	ft_free_2d(char **s);
-char	**ft_split(char const *s, char c);
+char	**ft_split_whitespace(char const *s);
 int		ft_strlen(char const *s);
+int		ft_whitespace(char const c);
+void	ft_error(char const *c);
 void	ft_data(t_info *info, char *file);
 
 // void	ft_write_map(char *name);

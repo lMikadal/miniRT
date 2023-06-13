@@ -9,3 +9,16 @@ int	ft_strlen(char const *s)
 		i++;
 	return (i);
 }
+
+int	ft_whitespace(char const c)
+{
+	if (c == ' ' || c == '\t' || c == '\v' \
+		|| c == '\f' || c == '\r')
+		return (1);
+	return (0);
+}
+
+void	ft_error(char const *c)
+{
+	printf("%s\n", c);
+}

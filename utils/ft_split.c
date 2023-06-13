@@ -1,6 +1,6 @@
 #include "../miniRT.h"
 
-static int	ft_count_word(char const *s, char c)
+static int	ft_count_word(char const *s)
 {
 	int	i;
 	int	word;
@@ -9,7 +9,7 @@ static int	ft_count_word(char const *s, char c)
 	word = 0;
 	while (s[i])
 	{
-		if (s[i] != c && (i == 0 || s[i - 1] == c))
+		if (ft_whitespace(s[i]) == 0 && (i == 0 || ft_whitespace(s[i - 1]) == 1))
 			word++;
 		i++;
 	}
@@ -31,7 +31,7 @@ static char	*ft_loc_string(char const *s, int start, int end)
 	return (m);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split_whitespace(char const *s)
 {
 	char	**m;
 	int		i;
@@ -40,16 +40,16 @@ char	**ft_split(char const *s, char c)
 
 	if (s == NULL)
 		return (0);
-	m = (char **)malloc((ft_count_word(s, c) + 1) * sizeof(char *));
+	m = (char **)malloc((ft_count_word(s) + 1) * sizeof(char *));
 	if (m == NULL)
 		return (0);
 	i = 0;
 	word = 0;
 	while (i <= ft_strlen(s))
 	{
-		if (s[i] != c && (i == 0 || s[i - 1] == c))
+		if (ft_whitespace(s[i]) == 0 && (i == 0 || ft_whitespace(s[i - 1]) == 1))
 			start = i;
-		if (i != 0 && s[i - 1] != c && (s[i] == c || s[i] == '\0'))
+		if (i != 0 && ft_whitespace(s[i - 1]) == 0 && (ft_whitespace(s[i]) == 1 || s[i] == '\0'))
 			m[word++] = ft_loc_string(s, start, i);
 		i++;
 	}
