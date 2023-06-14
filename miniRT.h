@@ -21,6 +21,8 @@
 // # include "minilibx_macos/mlx.h"
 # include "get_next_line/get_next_line.h"
 
+# define T 1
+# define F 0
 # define HORIZON 1280
 # define VERTICAL 720
 # define ESC 53
@@ -91,12 +93,22 @@ typedef struct s_info
 	t_cylinder	*cylinder;
 }	t_info;
 
-void	ft_free_2d(char **s);
-char	**ft_split_whitespace(char const *s);
-int		ft_strlen(char const *s);
-int		ft_whitespace(char const c);
-void	ft_error(char const *c);
 void	ft_data(t_info *info, char *file);
+void	ft_error(const char *c);
+void	ft_check_len_data(char **data, int len);
+int		ft_whitespace(const char c);
+int		ft_range_int(int min, int max, int num);
+int		ft_range_double(double min, double max, double num);
+int		ft_strcmp(const char *s1, const char *s2);
+int		ft_str_is_digit(const char *s);
+void	ft_free_2d(char **s);
+int		ft_count_word(const char *s, char c);
+char	**ft_split_whitespace(const char *s);
+char	**ft_split(const char *s, char c);
+int		ft_strlen(const char *s);
+double	ft_atod(const char *s);
+int		ft_atoi(const char *s);
+int		ft_set_color(const char *s);
 
 // void	ft_write_map(char *name);
 

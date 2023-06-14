@@ -16,9 +16,12 @@ NAME = miniRT
 
 # SRCS = map.c
 SRCS = setting.c \
+	utils/ft_check_err.c \
+	utils/ft_check_t_f.c \
 	utils/ft_free.c \
 	utils/ft_split.c \
-	utils/ft_utils.c
+	utils/ft_utils.c \
+	utils/ft_utils2.c \
 
 G_N_L = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
 
