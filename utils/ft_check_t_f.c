@@ -44,6 +44,8 @@ int	ft_str_is_digit(const char *s)
 	i = -1;
 	single = 1;
 	point = 1;
+	if (s == NULL)
+		return (F);
 	if (s[0] == '-' || s[0] == '+')
 	{
 		single--;

@@ -1,13 +1,13 @@
 #include "../miniRT.h"
 
-int	ft_atoi(const char *s)
+int	ft_atoi(const char *s, t_info *info)
 {
 	int	i;
 	int	m;
 	int	sum;
 
 	if (ft_str_is_digit(s) == F)
-		ft_error("Error is not digit");
+		ft_error("Error is not digit", info);
 	i = 0;
 	while (ft_whitespace(s[i]))
 		i++;
@@ -22,7 +22,7 @@ int	ft_atoi(const char *s)
 	return (sum * m);
 }
 
-int	ft_set_color(const char *s)
+int	ft_set_color(const char *s, t_info *info)
 {
 	int		color;
 	char	**split_color;
@@ -33,15 +33,73 @@ int	ft_set_color(const char *s)
 	while (split_color[++i])
 	{
 		if (ft_str_is_digit(split_color[i]) == F || \
-			ft_range_double(0, 255, ft_atod(split_color[i])) == F)
+			ft_range_double(0, 255, ft_atod(split_color[i], info)) == F)
 		{
 			ft_free_2d(split_color);
-			ft_error("Error color");
+			ft_error("Error color", info);
 		}
 	}
-	color = ft_atoi(split_color[0]) << 16;
-	color += ft_atoi(split_color[1]) << 8;
-	color += ft_atoi(split_color[2]);
+	if (i != 3)
+	{
+		ft_free_2d(split_color);
+		ft_error("Error color size", info);
+	}
+	color = ft_atoi(split_color[0], info) << 16;
+	color += ft_atoi(split_color[1], info) << 8;
+	color += ft_atoi(split_color[2], info);
 	ft_free_2d(split_color);
 	return (color);
+}
+
+void	ft_set_point(double *point, char *data, t_info *info)
+{
+	char	**split_data;
+	int		i;
+
+	split_data = ft_split(data, ',');
+	i = -1;
+	while (split_data[++i])
+	{
+		if (ft_str_is_digit(split_data[i]) == F)
+		{
+			ft_free_2d(split_data);
+			ft_error("Error point", info);
+		}
+	}
+	if (i != 3)
+	{
+		ft_free_2d(split_data);
+		ft_error("Error point size", info);
+	}
+	point[0] = ft_atod(split_data[0], info);
+	point[1] = ft_atod(split_data[1], info);
+	point[2] = ft_atod(split_data[2], info);
+	ft_free_2d(split_data);
+}
+
+void	ft_set_vector(double *vector, char *data, t_info *info)
+{
+	char	**split_data;
+	int		i;
+
+	split_data = ft_split(data, ',');
+	i = -1;
+	while (split_data[++i])
+	{
+		if (ft_str_is_digit(split_data[i]) == F || \
+			ft_range_double(-1.0, 1.0, ft_atod(split_data[i], info)) == F)
+		{
+			ft_free_2d(split_data);
+			ft_error("Error vector", info);
+		}
+	}
+	if (i != 3)
+	{
+		ft_free_2d(split_data);
+		ft_error("Error vector size", info);
+	}
+	vector[0] = ft_atod(split_data[0], info);
+	vector[1] = ft_atod(split_data[1], info);
+	vector[2] = ft_atod(split_data[2], info);
+	ft_free_2d(split_data);
 }

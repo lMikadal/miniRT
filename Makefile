@@ -16,6 +16,9 @@ NAME = miniRT
 
 # SRCS = map.c
 SRCS = setting.c \
+	setting2.c \
+	setting3.c \
+	test.c \
 	utils/ft_check_err.c \
 	utils/ft_check_t_f.c \
 	utils/ft_free.c \

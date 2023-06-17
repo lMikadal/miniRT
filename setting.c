@@ -1,24 +1,5 @@
 #include "miniRT.h"
 
-static void	ft_set_ambient(t_info *info, char **data)
-{
-	t_ambient	*ambient;
-	double		ratio;
-	int			color;
-
-	ft_check_len_data(data, 3);
-	ambient = (t_ambient *)malloc(sizeof(t_ambient *));
-	if (ambient == NULL)
-		return ;
-	ratio = ft_atod(data[1]);
-	if (ft_range_double(0.0, 1.0, ratio) == 0)
-		ft_error("Error ambient");
-	color = ft_set_color(data[2]);
-	ambient->ratio = ratio;
-	ambient->color = color;
-	info->ambient = ambient;
-}
-
 static void ft_insert_data(t_info *info, char **data)
 {
 	int	len;
@@ -27,17 +8,17 @@ static void ft_insert_data(t_info *info, char **data)
 	if (len == 1 && ft_strcmp(data[0], "A") == F)
 		ft_set_ambient(info, data);
 	else if (len == 1 && ft_strcmp(data[0], "C") == F)
-		printf("C\n");
+		ft_set_camera(info, data);
 	else if (len == 1 && ft_strcmp(data[0], "L") == F)
-		printf("L\n");
+		ft_set_light(info, data);
 	else if (len == 2 && ft_strcmp(data[0], "pl") == F)
-		printf("pl\n");
+		ft_set_plane(info, data);
 	else if (len == 2 && ft_strcmp(data[0], "sp") == F)
-		printf("sp\n");
+		ft_set_sphere(info, data);
 	else if (len == 2 && ft_strcmp(data[0], "cy") == F)
-		printf("cy\n");
+		ft_set_cylinder(info, data);
 	else if (ft_strcmp(data[0], "\n"))
-		ft_error("Error file");
+		ft_error("Error file", info);
 }
 
 void	ft_data(t_info *info, char *file)
@@ -48,7 +29,7 @@ void	ft_data(t_info *info, char *file)
 	
 	open_fd = open(file, O_RDONLY);
 	if (open_fd < 0)
-		ft_error("Error open file");
+		printf("Error open file\n");
 	while (1 && open_fd > 0)
 	{
 		data = get_next_line(open_fd);
@@ -60,4 +41,5 @@ void	ft_data(t_info *info, char *file)
 		ft_free_2d(split_data);
 		free(data);
 	}
+	close(open_fd);
 }

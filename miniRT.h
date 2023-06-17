@@ -55,6 +55,7 @@ typedef struct s_light
 {
 	double	point[3];
 	double	ratio;
+	int		color;
 }	t_light;
 
 typedef struct s_sphere
@@ -75,7 +76,7 @@ typedef struct s_plane
 
 typedef struct s_cylinder
 {
-	double				point[3];
+	double				center[3];
 	double				vector[3];
 	double				diameter;
 	double				height;
@@ -93,22 +94,34 @@ typedef struct s_info
 	t_cylinder	*cylinder;
 }	t_info;
 
+// del
+void ft_print_data(t_info *info);
+
 void	ft_data(t_info *info, char *file);
-void	ft_error(const char *c);
-void	ft_check_len_data(char **data, int len);
+void	ft_set_ambient(t_info *info, char **data);
+void	ft_set_camera(t_info *info, char **data);
+void	ft_set_light(t_info *info, char **data);
+void	ft_set_plane(t_info *info, char **data);
+void	ft_set_sphere(t_info *info, char **data);
+void	ft_set_cylinder(t_info *info, char **data);
+void	ft_error(const char *c, t_info *info);
+void	ft_check_len_data(char **data, int len, t_info *info);
 int		ft_whitespace(const char c);
 int		ft_range_int(int min, int max, int num);
 int		ft_range_double(double min, double max, double num);
 int		ft_strcmp(const char *s1, const char *s2);
 int		ft_str_is_digit(const char *s);
 void	ft_free_2d(char **s);
+void	ft_free_info(t_info *info);
 int		ft_count_word(const char *s, char c);
 char	**ft_split_whitespace(const char *s);
 char	**ft_split(const char *s, char c);
 int		ft_strlen(const char *s);
-double	ft_atod(const char *s);
-int		ft_atoi(const char *s);
-int		ft_set_color(const char *s);
+double	ft_atod(const char *s, t_info *info);
+int		ft_atoi(const char *s, t_info *info);
+int		ft_set_color(const char *s, t_info *info);
+void	ft_set_point(double *point, char *data, t_info *info);
+void	ft_set_vector(double *vector, char *data, t_info *info);
 
 // void	ft_mlx_pixel_put(t_mlx *ptr, int x, int y, int color)
 // void	ft_write_map(char *name);

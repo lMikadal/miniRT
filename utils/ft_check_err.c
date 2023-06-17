@@ -1,12 +1,13 @@
-#include "miniRT.h"
+#include "../miniRT.h"
 
-void	ft_error(const char *c)
+void	ft_error(const char *c, t_info *info)
 {
 	printf("%s\n", c);
+	ft_free_info(info);
 	exit(0);
 }
 
-void	ft_check_len_data(char **data, int len)
+void	ft_check_len_data(char **data, int len, t_info *info)
 {
 	int	i;
 
@@ -14,5 +15,5 @@ void	ft_check_len_data(char **data, int len)
 	while (data[i])
 		i++;
 	if (i != len)
-		ft_error("Error data not match");	
+		ft_error("Error data not match", info);	
 }

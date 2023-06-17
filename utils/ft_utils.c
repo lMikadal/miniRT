@@ -39,14 +39,14 @@ static double	read_decimals(const char *str, int i, int d_power)
 	return (sum);
 }
 
-double	ft_atod(const char *s)
+double	ft_atod(const char *s, t_info *info)
 {
 	int		i;
 	double	sum;
 	int		m;
 
 	if (ft_str_is_digit(s) == F)
-		ft_error("Error is not digit");
+		ft_error("Error is not digit", info);
 	i = 0;
 	sum = 0.0;
 	m = 1;
