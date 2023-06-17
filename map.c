@@ -12,14 +12,23 @@
 
 #include "miniRT.h"
 
-void	ft_close(t_mlx *mlx)
+// write pixel
+void	ft_mlx_pixel_put(t_mlx *ptr, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = ptr->addr + ((y * ptr->line) + (x * (ptr->bits / 8)));
+	*(unsigned int *)dst = color;
+}
+
+static void	ft_close(t_mlx *mlx)
 {
 	mlx_destroy_window(mlx->mlx, mlx->mlx_win);
 	mlx_destroy_image(mlx->mlx, mlx->img);
 	exit (0);
 }
 
-void	ft_key_hook(int key, t_mlx *mlx)
+static void	ft_key_hook(int key, t_mlx *mlx)
 {
 	if (key == ESC)
 		ft_close(mlx);

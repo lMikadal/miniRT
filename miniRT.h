@@ -110,6 +110,7 @@ double	ft_atod(const char *s);
 int		ft_atoi(const char *s);
 int		ft_set_color(const char *s);
 
+// void	ft_mlx_pixel_put(t_mlx *ptr, int x, int y, int color)
 // void	ft_write_map(char *name);
 
 #endif
