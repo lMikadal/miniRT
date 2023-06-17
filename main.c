@@ -30,7 +30,6 @@ int	main(int ac, char **av)
 	{
 		ft_init_info(&info);
 		ft_data(&info, av[1]);
-		// ft_print_data(&info); // del
 		ft_free_info(&info);
 	}
 	else

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   setting3.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pmikada <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/17 17:30:43 by pmikada           #+#    #+#             */
+/*   Updated: 2023/06/17 17:32:03 by pmikada          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "miniRT.h"
 
 static void	ft_set_sphere2(t_sphere **sphere, char **data, t_info *info)
@@ -15,13 +27,13 @@ void	ft_set_sphere(t_info *info, char **data)
 {
 	t_sphere	*tmp;
 
-    ft_check_len_data(data, 4, info);
+	ft_check_len_data(data, 4, info);
 	if (info->sphere == NULL)
 		ft_set_sphere2(&info->sphere, data, info);
 	else
 	{
 		tmp = info->sphere;
-		while(tmp->next != NULL)
+		while (tmp->next != NULL)
 			tmp = tmp->next;
 		ft_set_sphere2(&tmp->next, data, info);
 	}
@@ -44,13 +56,13 @@ void	ft_set_cylinder(t_info *info, char **data)
 {
 	t_cylinder	*tmp;
 
-    ft_check_len_data(data, 6, info);
+	ft_check_len_data(data, 6, info);
 	if (info->cylinder == NULL)
 		ft_set_cylinder2(&info->cylinder, data, info);
 	else
 	{
 		tmp = info->cylinder;
-		while(tmp->next != NULL)
+		while (tmp->next != NULL)
 			tmp = tmp->next;
 		ft_set_cylinder2(&tmp->next, data, info);
 	}

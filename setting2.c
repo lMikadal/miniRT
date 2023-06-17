@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   setting2.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pmikada <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/17 17:28:12 by pmikada           #+#    #+#             */
+/*   Updated: 2023/06/17 17:30:22 by pmikada          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "miniRT.h"
 
 void	ft_set_ambient(t_info *info, char **data)
@@ -24,7 +36,7 @@ void	ft_set_camera(t_info *info, char **data)
 	t_camera	*camera;
 	double		fov;
 
-    ft_check_len_data(data, 4, info);
+	ft_check_len_data(data, 4, info);
 	camera = (t_camera *)malloc(sizeof(t_camera));
 	if (camera == NULL)
 		return ;
@@ -42,7 +54,7 @@ void	ft_set_light(t_info *info, char **data)
 	t_light	*light;
 	double	ratio;
 
-    ft_check_len_data(data, 4, info);
+	ft_check_len_data(data, 4, info);
 	light = (t_light *)malloc(sizeof(t_light));
 	if (light == NULL)
 		return ;
@@ -51,7 +63,7 @@ void	ft_set_light(t_info *info, char **data)
 	if (ft_range_double(0.0, 1.0, ratio) == F)
 		ft_error("Error light", info);
 	light->ratio = ratio;
-    light->color = ft_set_color(data[3], info);
+	light->color = ft_set_color(data[3], info);
 	info->light = light;
 }
 
@@ -70,13 +82,13 @@ void	ft_set_plane(t_info *info, char **data)
 {
 	t_plane	*tmp;
 
-    ft_check_len_data(data, 4, info);
+	ft_check_len_data(data, 4, info);
 	if (info->plane == NULL)
 		ft_set_plane2(&info->plane, data, info);
 	else
 	{
 		tmp = info->plane;
-		while(tmp->next != NULL)
+		while (tmp->next != NULL)
 			tmp = tmp->next;
 		ft_set_plane2(&tmp->next, data, info);
 	}

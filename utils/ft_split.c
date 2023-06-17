@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pmikada <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/17 17:34:03 by pmikada           #+#    #+#             */
+/*   Updated: 2023/06/17 17:34:05 by pmikada          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../miniRT.h"
 
 static int	ft_count_word_whitespace(const char *s)
@@ -9,7 +21,8 @@ static int	ft_count_word_whitespace(const char *s)
 	word = 0;
 	while (s[i])
 	{
-		if (ft_whitespace(s[i]) == 0 && (i == 0 || ft_whitespace(s[i - 1]) == 1))
+		if (ft_whitespace(s[i]) == 0 && \
+			(i == 0 || ft_whitespace(s[i - 1]) == 1))
 			word++;
 		i++;
 	}
@@ -63,9 +76,11 @@ char	**ft_split_whitespace(const char *s)
 	word = 0;
 	while (i <= ft_strlen(s))
 	{
-		if (ft_whitespace(s[i]) == 0 && (i == 0 || ft_whitespace(s[i - 1]) == 1))
+		if (ft_whitespace(s[i]) == 0 \
+			&& (i == 0 || ft_whitespace(s[i - 1]) == 1))
 			start = i;
-		if (i != 0 && ft_whitespace(s[i - 1]) == 0 && (ft_whitespace(s[i]) == 1 || s[i] == '\0'))
+		if (i != 0 && ft_whitespace(s[i - 1]) == 0 \
+			&& (ft_whitespace(s[i]) == 1 || s[i] == '\0'))
 			m[word++] = ft_loc_string(s, start, i);
 		i++;
 	}

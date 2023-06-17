@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   setting.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pmikada <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/17 17:27:00 by pmikada           #+#    #+#             */
+/*   Updated: 2023/06/17 17:27:02 by pmikada          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "miniRT.h"
 
-static void ft_insert_data(t_info *info, char **data)
+static void	ft_insert_data(t_info *info, char **data)
 {
 	int	len;
 
@@ -26,7 +38,7 @@ void	ft_data(t_info *info, char *file)
 	int		open_fd;
 	char	*data;
 	char	**split_data;
-	
+
 	open_fd = open(file, O_RDONLY);
 	if (open_fd < 0)
 		printf("Error open file\n");
