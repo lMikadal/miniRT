@@ -56,7 +56,7 @@ void ft_print_data(t_info *info)
 
 		printf("cylinder\n");
 		while(tmp_cylinder != NULL) {
-			printf("point: %lf %lf %lf\n",tmp_cylinder->point[0],tmp_cylinder->point[1],tmp_cylinder->point[2]);
+			printf("point: %lf %lf %lf\n",tmp_cylinder->center[0],tmp_cylinder->center[1],tmp_cylinder->center[2]);
 			printf("vector: %lf %lf %lf\n",tmp_cylinder->vector[0],tmp_cylinder->vector[1],tmp_cylinder->vector[2]);
 			printf("diameter: %lf\n",tmp_cylinder->diameter);
 			printf("height: %lf\n",tmp_cylinder->height);

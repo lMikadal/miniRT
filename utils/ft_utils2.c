@@ -34,6 +34,22 @@ int	ft_atoi(const char *s, t_info *info)
 	return (sum * m);
 }
 
+static int	ft_check_str(const char *data)
+{
+	int	i;
+	int	count;
+
+	i = -1;
+	while(data[++i])
+	{
+		if (data[i] == ',')
+			count++;
+	}
+	if (count != 2)
+		return (F);
+	return (T);
+}
+
 int	ft_set_color(const char *s, t_info *info)
 {
 	int		color;
@@ -51,7 +67,7 @@ int	ft_set_color(const char *s, t_info *info)
 			ft_error("Error color", info);
 		}
 	}
-	if (i != 3)
+	if (i != 3 || ft_check_str(s) == F)
 	{
 		ft_free_2d(split_color);
 		ft_error("Error color size", info);
@@ -78,7 +94,7 @@ void	ft_set_point(double *point, char *data, t_info *info)
 			ft_error("Error point", info);
 		}
 	}
-	if (i != 3)
+	if (i != 3 || ft_check_str(s) == F)
 	{
 		ft_free_2d(split_data);
 		ft_error("Error point size", info);
@@ -105,7 +121,7 @@ void	ft_set_vector(double *vector, char *data, t_info *info)
 			ft_error("Error vector", info);
 		}
 	}
-	if (i != 3)
+	if (i != 3 || ft_check_str(s) == F)
 	{
 		ft_free_2d(split_data);
 		ft_error("Error vector size", info);
