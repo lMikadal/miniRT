@@ -19,16 +19,16 @@ void	ft_set_ambient(t_info *info, char **data)
 	int			color;
 
 	ft_check_len_data(data, 3, info);
-	ambient = (t_ambient *)malloc(sizeof(t_ambient));
-	if (ambient == NULL)
+	info->count_ambient -= 1;
+	if (info->count_ambient < 0)
+		ft_error("Error ambient more than one", info);
+	info->ambient = (t_ambient *)malloc(sizeof(t_ambient));
+	if (info->ambient == NULL)
 		return ;
-	ratio = ft_atod(data[1], info);
-	if (ft_range_double(0.0, 1.0, ratio) == F)
+	info->ambient->ratio = ft_atod(data[1], info);
+	if (ft_range_double(0.0, 1.0, info->ambient->ratio) == F)
 		ft_error("Error ambient", info);
-	color = ft_set_color(data[2], info);
-	ambient->ratio = ratio;
-	ambient->color = color;
-	info->ambient = ambient;
+	info->ambient->color = ft_set_color(data[2], info);
 }
 
 void	ft_set_camera(t_info *info, char **data)
@@ -37,16 +37,17 @@ void	ft_set_camera(t_info *info, char **data)
 	double		fov;
 
 	ft_check_len_data(data, 4, info);
-	camera = (t_camera *)malloc(sizeof(t_camera));
-	if (camera == NULL)
+	info->count_camera -= 1;
+	if (info->count_camera < 0)
+		ft_error("Error camera more than one", info);
+	info->camera = (t_camera *)malloc(sizeof(t_camera));
+	if (info->camera == NULL)
 		return ;
-	ft_set_point(camera->point, data[1], info);
-	ft_set_vector(camera->vector, data[2], info);
-	fov = ft_atod(data[3], info);
-	if (ft_range_int(0, 180, fov) == F)
+	ft_set_point(info->camera->point, data[1], info);
+	ft_set_vector(info->camera->vector, data[2], info);
+	info->camera->fov = ft_atod(data[3], info);
+	if (ft_range_int(0, 180, info->camera->fov) == F)
 		ft_error("Error camera", info);
-	camera->fov = fov;
-	info->camera = camera;
 }
 
 void	ft_set_light(t_info *info, char **data)
@@ -55,16 +56,17 @@ void	ft_set_light(t_info *info, char **data)
 	double	ratio;
 
 	ft_check_len_data(data, 4, info);
-	light = (t_light *)malloc(sizeof(t_light));
-	if (light == NULL)
+	info->count_light -= 1;
+	if (info->count_light < 0)
+		ft_error("Error light more than one", info);
+	info->light = (t_light *)malloc(sizeof(t_light));
+	if (info->light == NULL)
 		return ;
-	ft_set_point(light->point, data[1], info);
-	ratio = ft_atod(data[2], info);
-	if (ft_range_double(0.0, 1.0, ratio) == F)
+	ft_set_point(info->light->point, data[1], info);
+	info->light->ratio = ft_atod(data[2], info);
+	if (ft_range_double(0.0, 1.0, info->light->ratio) == F)
 		ft_error("Error light", info);
-	light->ratio = ratio;
-	light->color = ft_set_color(data[3], info);
-	info->light = light;
+	info->light->color = ft_set_color(data[3], info);
 }
 
 static void	ft_set_plane2(t_plane **plane, char **data, t_info *info)

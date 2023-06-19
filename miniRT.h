@@ -92,6 +92,9 @@ typedef struct s_info
 	t_sphere	*sphere;
 	t_plane		*plane;
 	t_cylinder	*cylinder;
+	int			count_ambient;
+	int			count_camera;
+	int			count_light;
 }	t_info;
 
 // del

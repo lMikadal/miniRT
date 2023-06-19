@@ -20,6 +20,9 @@ static void	ft_init_info(t_info *info)
 	info->sphere = NULL;
 	info->plane = NULL;
 	info->cylinder = NULL;
+	info->count_ambient = 1;
+	info->count_camera = 1;
+	info->count_light = 1;
 }
 
 int	main(int ac, char **av)
