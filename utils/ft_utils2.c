@@ -40,6 +40,7 @@ static int	ft_check_str(const char *data)
 	int	count;
 
 	i = -1;
+    count = 0;
 	while(data[++i])
 	{
 		if (data[i] == ',')
@@ -94,7 +95,7 @@ void	ft_set_point(double *point, char *data, t_info *info)
 			ft_error("Error point", info);
 		}
 	}
-	if (i != 3 || ft_check_str(s) == F)
+	if (i != 3 || ft_check_str(data) == F)
 	{
 		ft_free_2d(split_data);
 		ft_error("Error point size", info);
@@ -121,7 +122,7 @@ void	ft_set_vector(double *vector, char *data, t_info *info)
 			ft_error("Error vector", info);
 		}
 	}
-	if (i != 3 || ft_check_str(s) == F)
+	if (i != 3 || ft_check_str(data) == F)
 	{
 		ft_free_2d(split_data);
 		ft_error("Error vector size", info);
