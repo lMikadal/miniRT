@@ -33,6 +33,7 @@ int	main(int ac, char **av)
 	{
 		ft_init_info(&info);
 		ft_data(&info, av[1]);
+		ft_write_map("miniRT", &info);
 		ft_free_info(&info);
 	}
 	else

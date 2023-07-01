@@ -34,7 +34,7 @@ static void	ft_key_hook(int key, t_mlx *mlx)
 		ft_close(mlx);
 }
 
-void	ft_write_map(char *name)
+void	ft_write_map(char *name, t_info *info)
 {
 	t_mlx	mlx;
 
@@ -44,7 +44,10 @@ void	ft_write_map(char *name)
     // create image
 	mlx.img = mlx_new_image(mlx.mlx, HORIZON, VERTICAL);
 	mlx.addr = mlx_get_data_addr(mlx.img, &mlx.bits, &mlx.line, &mlx.endian);
-    // push image to window
+    
+	render(&mlx, info);
+	
+	// push image to window
 	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.img, 0, 0);
 	// close window
 	mlx_key_hook(mlx.mlx_win, ft_key_hook, &mlx);

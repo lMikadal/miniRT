@@ -18,14 +18,16 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <math.h>
-// # include "minilibx_macos/mlx.h"
+# include "minilibx_macos/mlx.h"
 # include "get_next_line/get_next_line.h"
+# include "vec3.h"
 
 # define T 1
 # define F 0
 # define HORIZON 1280
 # define VERTICAL 720
 # define ESC 53
+# define PI 3.141592653589793
 
 typedef struct s_mlx
 {
@@ -126,7 +128,8 @@ int		ft_set_color(const char *s, t_info *info);
 void	ft_set_point(double *point, char *data, t_info *info);
 void	ft_set_vector(double *vector, char *data, t_info *info);
 
-// void	ft_mlx_pixel_put(t_mlx *ptr, int x, int y, int color)
-// void	ft_write_map(char *name);
+void	ft_mlx_pixel_put(t_mlx *ptr, int x, int y, int color);
+void	ft_write_map(char *name, t_info *info);
+void	render(t_mlx *mlx, t_info *info);
 
 #endif

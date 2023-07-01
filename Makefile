@@ -14,8 +14,8 @@ GCC = cc
 
 NAME = miniRT
 
-# SRCS = map.c
-SRCS = setting/setting.c \
+SRCS = map.c \
+	setting/setting.c \
 	setting/setting2.c \
 	setting/setting3.c \
 	utils/ft_check_err.c \
@@ -24,26 +24,28 @@ SRCS = setting/setting.c \
 	utils/ft_split.c \
 	utils/ft_utils.c \
 	utils/ft_utils2.c \
+	vec3.c \
+	render.c \
 	test.c \
 
 G_N_L = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
 
-# LIBX = minilibx_macos/mlx_shaders.c minilibx_macos/mlx_new_window.m minilibx_macos/mlx_init_loop.m minilibx_macos/mlx_new_image.m \
-# 		minilibx_macos/mlx_xpm.c minilibx_macos/mlx_int_str_to_wordtab.c
+LIBX = minilibx_macos/mlx_shaders.c minilibx_macos/mlx_new_window.m minilibx_macos/mlx_init_loop.m minilibx_macos/mlx_new_image.m \
+		minilibx_macos/mlx_xpm.c minilibx_macos/mlx_int_str_to_wordtab.c
 
 OBJS = $(SRCS:.c=.o)
 
 OBJS_G_N_L = $(G_N_L:.c=.o)
 
 OBJS_LIBX = $(LIBX:.c=.o)
-# OBJS_LIBX_M = $(OBJS_LIBX:.m=.o)
+OBJS_LIBX_M = $(OBJS_LIBX:.m=.o)
 
 all: $(NAME)
 
-# $(NAME): $(OBJS) $(OBJS_G_N_L) $(OBJS_LIBX_M)
-# 	$(GCC) -Wall -Wextra -Werror main.c *.o get_next_line/*.o minilibx_macos/*.o -framework OpenGL -framework AppKit -o $(NAME)
-$(NAME): $(OBJS) $(OBJS_G_N_L) 
-	$(GCC) -Wall -Wextra -Werror main.c *.o setting/*.o utils/*.o get_next_line/*.o -o $(NAME)
+$(NAME): $(OBJS) $(OBJS_G_N_L) $(OBJS_LIBX_M)
+	$(GCC) -Wall -Wextra -Werror main.c *.o setting/*.o utils/*.o get_next_line/*.o minilibx_macos/*.o -framework OpenGL -framework AppKit -o $(NAME)
+# $(NAME): $(OBJS) $(OBJS_G_N_L) 
+# 	$(GCC) -Wall -Wextra -Werror main.c *.o setting/*.o utils/*.o get_next_line/*.o -o $(NAME)
 
 clean:
 	rm -rf *.o
