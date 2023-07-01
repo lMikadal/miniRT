@@ -15,16 +15,16 @@ GCC = cc
 NAME = miniRT
 
 # SRCS = map.c
-SRCS = setting.c \
-	setting2.c \
-	setting3.c \
-	test.c \
+SRCS = setting/setting.c \
+	setting/setting2.c \
+	setting/setting3.c \
 	utils/ft_check_err.c \
 	utils/ft_check_t_f.c \
 	utils/ft_free.c \
 	utils/ft_split.c \
 	utils/ft_utils.c \
 	utils/ft_utils2.c \
+	test.c \
 
 G_N_L = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
 
@@ -43,11 +43,12 @@ all: $(NAME)
 # $(NAME): $(OBJS) $(OBJS_G_N_L) $(OBJS_LIBX_M)
 # 	$(GCC) -Wall -Wextra -Werror main.c *.o get_next_line/*.o minilibx_macos/*.o -framework OpenGL -framework AppKit -o $(NAME)
 $(NAME): $(OBJS) $(OBJS_G_N_L) 
-	$(GCC) -Wall -Wextra -Werror main.c *.o utils/*.o get_next_line/*.o -o $(NAME)
+	$(GCC) -Wall -Wextra -Werror main.c *.o setting/*.o utils/*.o get_next_line/*.o -o $(NAME)
 
 clean:
 	rm -rf *.o
 	rm -rf get_next_line/*.o
+	rm -rf setting/*.o
 	rm -rf utils/*.o
 	rm -rf minilibx_macos/*.o
 

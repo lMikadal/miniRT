@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "../miniRT.h"
 
 static void	ft_set_sphere2(t_sphere **sphere, char **data, t_info *info)
 {
