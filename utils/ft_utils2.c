@@ -51,9 +51,9 @@ static int	ft_check_str(const char *data)
 	return (T);
 }
 
-int	ft_set_color(const char *s, t_info *info)
+t_rgb	ft_set_color(const char *s, t_info *info)
 {
-	int		color;
+	t_rgb	color;
 	char	**split_color;
 	int		i;
 
@@ -73,9 +73,9 @@ int	ft_set_color(const char *s, t_info *info)
 		ft_free_2d(split_color);
 		ft_error("Error color size", info);
 	}
-	color = ft_atoi(split_color[0], info) << 16;
-	color += ft_atoi(split_color[1], info) << 8;
-	color += ft_atoi(split_color[2], info);
+	color.r = ft_atoi(split_color[0], info);
+	color.g = ft_atoi(split_color[1], info);
+	color.b = ft_atoi(split_color[2], info);
 	ft_free_2d(split_color);
 	return (color);
 }
