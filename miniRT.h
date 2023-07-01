@@ -29,6 +29,13 @@
 # define ESC 53
 # define PI 3.141592653589793
 
+typedef struct s_rgb
+{
+	int	r;
+	int	g;
+	int	b;
+}	t_rgb;
+
 typedef struct s_mlx
 {
 	void	*mlx;
@@ -42,8 +49,8 @@ typedef struct s_mlx
 
 typedef struct s_ambient
 {
-	double	ratio;
-	int		color;
+	double		ratio;
+	t_rgb		color;
 }	t_ambient;
 
 typedef struct s_camera
@@ -55,16 +62,16 @@ typedef struct s_camera
 
 typedef struct s_light
 {
-	double	point[3];
-	double	ratio;
-	int		color;
+	double		point[3];
+	double		ratio;
+	t_rgb		color;
 }	t_light;
 
 typedef struct s_sphere
 {
 	double			center[3];
 	double			diameter;
-	int				color;
+	t_rgb			color;
 	struct s_sphere	*next;
 }	t_sphere;
 
@@ -72,7 +79,7 @@ typedef struct s_plane
 {
 	double			point[3];
 	double			vector[3];
-	int				color;
+	t_rgb			color;
 	struct s_plane	*next;
 }	t_plane;
 
@@ -82,7 +89,7 @@ typedef struct s_cylinder
 	double				vector[3];
 	double				diameter;
 	double				height;
-	int					color;
+	t_rgb				color;
 	struct s_cylinder	*next;
 }	t_cylinder;
 
@@ -124,9 +131,10 @@ char	**ft_split(const char *s, char c);
 int		ft_strlen(const char *s);
 double	ft_atod(const char *s, t_info *info);
 int		ft_atoi(const char *s, t_info *info);
-int		ft_set_color(const char *s, t_info *info);
+t_rgb	ft_set_color(const char *s, t_info *info);
 void	ft_set_point(double *point, char *data, t_info *info);
 void	ft_set_vector(double *vector, char *data, t_info *info);
+int		ft_color(t_rgb color);
 
 void	ft_mlx_pixel_put(t_mlx *ptr, int x, int y, int color);
 void	ft_write_map(char *name, t_info *info);
