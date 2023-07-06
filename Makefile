@@ -26,6 +26,7 @@ SRCS = map.c \
 	utils/ft_utils2.c \
 	utils/ft_utils3.c \
 	vec3.c \
+	ray.c \
 	render.c \
 	test.c \
 

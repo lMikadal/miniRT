@@ -21,11 +21,12 @@
 # include "minilibx_macos/mlx.h"
 # include "get_next_line/get_next_line.h"
 # include "vec3.h"
+# include "ray.h"
 
 # define T 1
 # define F 0
-# define HORIZON 1280
-# define VERTICAL 720
+# define HORIZON 400
+# define VERTICAL 225
 # define ESC 53
 # define PI 3.141592653589793
 
