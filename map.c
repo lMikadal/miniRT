@@ -46,7 +46,6 @@ void	ft_write_map(char *name, t_info *info)
 	mlx.addr = mlx_get_data_addr(mlx.img, &mlx.bits, &mlx.line, &mlx.endian);
     
 	render(&mlx, info);
-	
 	// push image to window
 	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.img, 0, 0);
 	// close window
