@@ -28,6 +28,8 @@ SRCS = map.c \
 	vec3.c \
 	ray.c \
 	render.c \
+	sphere.c \
+	hittable.c \
 	test.c \
 
 G_N_L = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c

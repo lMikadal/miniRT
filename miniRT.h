@@ -20,6 +20,7 @@
 # include <math.h>
 # include "minilibx_macos/mlx.h"
 # include "get_next_line/get_next_line.h"
+# include "hittable.h"
 # include "vec3.h"
 # include "ray.h"
 
@@ -136,6 +137,8 @@ t_rgb	ft_set_color(const char *s, t_info *info);
 void	ft_set_point(double *point, char *data, t_info *info);
 void	ft_set_vector(double *vector, char *data, t_info *info);
 int		ft_color(t_rgb color);
+int		ft_sphere(t_ray r, double t_min, double t_max, t_hit_record *rec, t_sphere *sphere);
+void	set_face_normal(t_ray r, t_v3d outward_normal, t_hit_record *record);
 
 void	ft_mlx_pixel_put(t_mlx *ptr, int x, int y, int color);
 void	ft_write_map(char *name, t_info *info);
