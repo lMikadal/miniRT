@@ -1,71 +1,40 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: pmikada <marvin@42.fr>                     +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/10/08 16:08:19 by pmikada           #+#    #+#              #
-#    Updated: 2022/10/08 16:08:23 by pmikada          ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+CC			= cc
+RM			= rm -r
+CFLAGS		= -g -Wall -Wextra -Werror
+LFLAGS		= -L/minilibx-linux -lXext -lX11 -lm
 
-GCC = cc
+NAME		= miniRT
 
-NAME = miniRT
+HEAD		= -I./includes
+HEAD_LIBMLX	= -I./minilibx-linux
+SRC_DIR		= ./src
+BUILD_DIR	= ./build
+LIBMLX		= minilibx-linux/libmlx.a
+MLX_DIR 	= minilibx-linux
 
-SRCS = map.c \
-	setting/setting.c \
-	setting/setting2.c \
-	setting/setting3.c \
-	utils/ft_check_err.c \
-	utils/ft_check_t_f.c \
-	utils/ft_free.c \
-	utils/ft_split.c \
-	utils/ft_utils.c \
-	utils/ft_utils2.c \
-	utils/ft_utils3.c \
-	vec3.c \
-	ray.c \
-	render.c \
-	sphere.c \
-	hittable.c \
-	test.c \
+SRCS		= $(shell find $(SRC_DIR) -name "*.c")
+OBJS		= $(SRCS:%=$(BUILD_DIR)/%.o)
 
-G_N_L = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
+$(BUILD_DIR)/$(NAME): $(OBJS) $(LIBMLX)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBMLX) $(LFLAGS) -o $@
+	cp $(BUILD_DIR)/$(NAME) .
 
-LIBX = minilibx_macos/mlx_shaders.c minilibx_macos/mlx_new_window.m minilibx_macos/mlx_init_loop.m minilibx_macos/mlx_new_image.m \
-		minilibx_macos/mlx_xpm.c minilibx_macos/mlx_int_str_to_wordtab.c
+$(BUILD_DIR)/%.c.o: %.c
+	mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $(HEAD) $(HEAD_LIBMLX) -c -o $@ $<
 
-OBJS = $(SRCS:.c=.o)
+$(LIBMLX):
+	make -C $(MLX_DIR)
 
-OBJS_G_N_L = $(G_N_L:.c=.o)
-
-OBJS_LIBX = $(LIBX:.c=.o)
-OBJS_LIBX_M = $(OBJS_LIBX:.m=.o)
-
-all: $(NAME)
-
-$(NAME): $(OBJS) $(OBJS_G_N_L) $(OBJS_LIBX_M)
-	$(GCC) -Wall -Wextra -Werror main.c *.o setting/*.o utils/*.o get_next_line/*.o minilibx_macos/*.o -framework OpenGL -framework AppKit -o $(NAME)
-# $(NAME): $(OBJS) $(OBJS_G_N_L) 
-# 	$(GCC) -Wall -Wextra -Werror main.c *.o setting/*.o utils/*.o get_next_line/*.o -o $(NAME)
+all: $(LIBMLX) $(BUILD_DIR)/$(NAME)
 
 clean:
-	rm -rf *.o
-	rm -rf get_next_line/*.o
-	rm -rf setting/*.o
-	rm -rf utils/*.o
-	rm -rf minilibx_macos/*.o
+	$(RM) $(BUILD_DIR)
+	make -C $(MLX_DIR) clean
 
 fclean: clean
-	rm -rf $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
-
-# test: $(OBJS) $(OBJS_G_N_L)
-# 	$(GCC) -Wall -Werror -Wextra main.c ./*.o get_next_line/*.o -o $(NAME)
-
-# retest: fclean test
 
 .PHONY: all clean fclean re
