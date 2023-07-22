@@ -6,11 +6,11 @@ int sphere(t_ray r)
 	double radius = 12.6;
 
 	t_v3d oc = v3d_opr_minus(r.orig, center);
-	double a = v3d_length_squared(r.dir);
-	double half_b = v3d_dot(oc, r.dir);
-	double c = v3d_length_squared(oc) - (radius * radius);
+	double a = v3d_dot(r.dir, r.dir);
+	double b = 2.0 * v3d_dot(oc, r.dir);
+	double c = v3d_dot(oc, oc) - (radius * radius);
 
-	double discrim = (half_b * half_b) - (a * c);
+	double discrim = (b * b) - (4 * a * c);
 
 	if (discrim < 0)
 		return (0);
