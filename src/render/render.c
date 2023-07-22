@@ -5,11 +5,10 @@ t_v3d ray_color(t_ray r)
 	t_v3d unit_dir;
 	double t;
 
-	t = sphere(r);
+	t = plane(r);
 	if (t == 1)
 	{
-		t_v3d N = v3d_unit_vec(v3d_opr_minus(ray_at(r, t), v3d_create(0, 0, -1)));
-		return v3d_mult_double(v3d_create(N.x + 1.0, N.y + 1.0, N.z + 1.0), 0.5);
+		return v3d_create(0, 255, 0);
 	}
 	unit_dir = v3d_unit_vec(r.dir);
 	t = 0.5 * (unit_dir.y + 1.0);

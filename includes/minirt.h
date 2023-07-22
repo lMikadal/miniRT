@@ -10,7 +10,7 @@
 #include "utils.h"
 #include "vec3.h"
 #include "ray.h"
-#include "sphere.h"
+#include "shape.h"
 #include "render.h"
 #include "mlx.h"
 #include "mlx_int.h"
