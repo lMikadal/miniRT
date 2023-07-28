@@ -5,7 +5,7 @@ t_v3d ray_color(t_ray r)
 	t_v3d unit_dir;
 	double t;
 
-	t = plane(r);
+	t = cylinder(r);
 	if (t == 1)
 	{
 		return v3d_create(0, 255, 0);

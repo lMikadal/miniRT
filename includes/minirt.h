@@ -17,8 +17,8 @@
 
 #define T 1
 #define F 0
-#define HORIZON 400
-#define VERTICAL 225
+#define HORIZON 800
+#define VERTICAL 450
 #define ESC 53
 #define PI 3.141592653589793
 
