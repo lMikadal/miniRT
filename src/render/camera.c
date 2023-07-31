@@ -26,7 +26,7 @@ t_ca create_camera(t_v3d lookfrom, t_v3d lookat, t_v3d vup, double fov, double a
     camera.origin = v3d_create(lookfrom.x, lookfrom.y, lookfrom.z);
     camera.horizontal = v3d_mult_double(u, viewport_width);
     camera.vertical = v3d_mult_double(v, viewport_height);
-    camera.l_l_c = v3d_opr_minus(v3d_opr_minus(v3d_opr_minus(camera.origin, v3d_div2(camera.horizontal, 2)), v3d_div2(camera.vertical, 2)), w);
+    camera.l_l_c = v3d_opr_minus(v3d_opr_minus(v3d_opr_minus(camera.origin, v3d_div_double(camera.horizontal, 2)), v3d_div_double(camera.vertical, 2)), w);
 
     return (camera);
 }

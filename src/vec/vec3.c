@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "minirt.h"
-#include <math.h>
 
 t_v3d v3d_create(double x, double y, double z)
 {
@@ -23,44 +22,13 @@ t_v3d v3d_create(double x, double y, double z)
 	return (v);
 }
 
-double v3d_length_squared(t_v3d v)
-{
-	return (v.x * v.x + v.y * v.y + v.z * v.z);
-}
-
-double v3d_length(t_v3d v)
-{
-	return (sqrt(v3d_length_squared(v)));
-}
-
-t_v3d v3d_normalize(t_v3d v)
-{
-	double len;
-	double invlen;
-
-	len = v3d_length(v);
-	if (len > 0)
-	{
-		invlen = 1 / len;
-		v.x *= invlen;
-		v.y *= invlen;
-		v.z *= invlen;
-	}
-	return (v);
-}
-
-double v3d_dot(t_v3d a, t_v3d b)
-{
-	return ((a.x * b.x) + (a.y * b.y) + (a.z * b.z));
-}
-
-t_v3d v3d_cross(t_v3d a, t_v3d b)
+t_v3d v3d_mult_minus(t_v3d a)
 {
 	t_v3d v;
 
-	v.x = a.y * b.z - a.z * b.y;
-	v.y = a.z * b.x - a.x * b.z;
-	v.z = a.x * b.y - a.y * b.x;
+	v.x = a.x * -1;
+	v.y = a.y * -1;
+	v.z = a.z * -1;
 	return (v);
 }
 
@@ -71,16 +39,6 @@ t_v3d v3d_opr_plus(t_v3d a, t_v3d b)
 	v.x = a.x + b.x;
 	v.y = a.y + b.y;
 	v.z = a.z + b.z;
-	return (v);
-}
-
-t_v3d v3d_opr_minus(t_v3d a, t_v3d b)
-{
-	t_v3d v;
-
-	v.x = a.x - b.x;
-	v.y = a.y - b.y;
-	v.z = a.z - b.z;
 	return (v);
 }
 
@@ -104,37 +62,23 @@ t_v3d v3d_opr_div(t_v3d a, t_v3d b)
 	return (v);
 }
 
-t_v3d v3d_mult_minus(t_v3d a)
+double v3d_length_squared(t_v3d v)
+{
+	return ((v.x * v.x) + (v.y * v.y) + (v.z * v.z));
+}
+
+double v3d_length(t_v3d v)
+{
+	return (sqrt(v3d_length_squared(v)));
+}
+
+t_v3d v3d_opr_minus(t_v3d a, t_v3d b)
 {
 	t_v3d v;
 
-	v.x = a.x * -1;
-	v.y = a.y * -1;
-	v.z = a.z * -1;
-	return (v);
-}
-
-void v3d_add2(t_v3d *a, t_v3d b)
-{
-	a->x += b.x;
-	a->y += b.y;
-	a->z += b.z;
-}
-
-void v3d_mult2(t_v3d *a, t_v3d b)
-{
-	a->x *= b.x;
-	a->y *= b.y;
-	a->z *= b.z;
-}
-
-t_v3d v3d_div2(t_v3d a, double b)
-{
-	t_v3d v;
-
-	v.x = a.x / b;
-	v.y = a.y / b;
-	v.z = a.z / b;
+	v.x = a.x - b.x;
+	v.y = a.y - b.y;
+	v.z = a.z - b.z;
 	return (v);
 }
 
@@ -145,6 +89,31 @@ t_v3d v3d_mult_double(t_v3d a, double b)
 	v.x = a.x * b;
 	v.y = a.y * b;
 	v.z = a.z * b;
+	return (v);
+}
+
+t_v3d v3d_div_double(t_v3d a, double b)
+{
+	t_v3d v;
+
+	v.x = a.x / b;
+	v.y = a.y / b;
+	v.z = a.z / b;
+	return (v);
+}
+
+double v3d_dot(t_v3d a, t_v3d b)
+{
+	return ((a.x * b.x) + (a.y * b.y) + (a.z * b.z));
+}
+
+t_v3d v3d_cross(t_v3d a, t_v3d b)
+{
+	t_v3d v;
+
+	v.x = (a.y * b.z) - (a.z * b.y);
+	v.y = (a.z * b.x) - (a.x * b.z);
+	v.z = (a.x * b.y) - (a.y * b.x);
 	return (v);
 }
 
