@@ -10,6 +10,7 @@
 #include "utils.h"
 #include "vec3.h"
 #include "ray.h"
+#include "hit_record.h"
 #include "camera.h"
 #include "shape.h"
 #include "render.h"
@@ -22,6 +23,9 @@
 #define VERTICAL 225
 #define ESC 53
 #define PI 3.141592653589793
+#define SP 1
+#define PL 2
+#define CY 3
 
 void ft_mlx_pixel_put(t_mlx *ptr, int x, int y, int color);
 void ft_write_map(char *name, t_info *info);

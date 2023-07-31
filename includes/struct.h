@@ -54,6 +54,15 @@ typedef struct s_cylinder
 	struct s_cylinder *next;
 } t_cylinder;
 
+typedef struct s_hittable_list
+{
+	int type;
+	t_sphere *sphere;
+	t_plane *plane;
+	t_cylinder *cylinder;
+	struct s_hittable_list *next;
+} t_hittable_list;
+
 typedef struct s_info
 {
 	t_ambient *ambient;
@@ -62,6 +71,7 @@ typedef struct s_info
 	t_sphere *sphere;
 	t_plane *plane;
 	t_cylinder *cylinder;
+	t_hittable_list *hittable_list;
 	int count_ambient;
 	int count_camera;
 	int count_light;
