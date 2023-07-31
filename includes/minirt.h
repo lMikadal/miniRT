@@ -10,6 +10,7 @@
 #include "utils.h"
 #include "vec3.h"
 #include "ray.h"
+#include "camera.h"
 #include "shape.h"
 #include "render.h"
 #include "mlx.h"
@@ -17,8 +18,8 @@
 
 #define T 1
 #define F 0
-#define HORIZON 800
-#define VERTICAL 450
+#define HORIZON 400
+#define VERTICAL 225
 #define ESC 53
 #define PI 3.141592653589793
 

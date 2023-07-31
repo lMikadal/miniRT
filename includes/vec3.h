@@ -32,7 +32,7 @@ t_v3d v3d_opr_mult(t_v3d a, t_v3d b);
 t_v3d v3d_opr_div(t_v3d a, t_v3d b);
 void v3d_add2(t_v3d *a, t_v3d b);
 void v3d_mult2(t_v3d *a, t_v3d b);
-void v3d_div2(t_v3d *a, double b);
+t_v3d v3d_div2(t_v3d a, double b);
 t_v3d v3d_mult_double(t_v3d a, double b);
 t_v3d v3d_unit_vec(t_v3d a);
 

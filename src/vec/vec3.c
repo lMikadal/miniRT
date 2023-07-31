@@ -128,11 +128,14 @@ void v3d_mult2(t_v3d *a, t_v3d b)
 	a->z *= b.z;
 }
 
-void v3d_div2(t_v3d *a, double b)
+t_v3d v3d_div2(t_v3d a, double b)
 {
-	a->x /= b;
-	a->y /= b;
-	a->z /= b;
+	t_v3d v;
+
+	v.x = a.x / b;
+	v.y = a.y / b;
+	v.z = a.z / b;
+	return (v);
 }
 
 t_v3d v3d_mult_double(t_v3d a, double b)

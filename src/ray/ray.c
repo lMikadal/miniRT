@@ -17,7 +17,7 @@ t_ray ray_create(t_v3d o, t_v3d d)
 	t_ray r;
 
 	r.orig = v3d_create(o.x, o.y, o.z);
-	r.dir = v3d_create(d.x, d.y, d.z);
+	r.dir = v3d_unit_vec(v3d_create(d.x, d.y, d.z));
 	return (r);
 }
 

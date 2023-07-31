@@ -2,8 +2,8 @@
 
 int sphere(t_ray r)
 {
-	t_v3d center = v3d_create(0, 0, 20.6);
-	double radius = 12.6 / 2;
+	t_v3d center = v3d_create(50.0, 100.0, -150.0);
+	double radius = 50 / 2;
 
 	t_v3d oc = v3d_opr_minus(r.orig, center);
 	double a = v3d_dot(r.dir, r.dir);
