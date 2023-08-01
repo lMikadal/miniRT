@@ -28,7 +28,7 @@ void render(t_mlx *mlx, t_info *info)
 	int max_depth = 50;
 
 	// Camera
-	t_ca camera = create_camera(v3d_create(0.0, 0.0, 0.0), v3d_create(0.0, 0, -200.0), v3d_create(0.0, 1.0, 0.0), 90, ratio);
+	t_ca camera = create_camera(v3d_create(-2.0, 2.0, 1.0), v3d_create(0.0, 0, -1.0), v3d_create(0.0, 1.0, 0.0), 90, ratio);
 
 	for (int j = height - 1; j >= 0; --j)
 	{
