@@ -5,10 +5,10 @@
 #include <stdio.h>
 #include <math.h>
 #include "get_next_line.h"
+#include "vec3.h"
 #include "struct.h"
 #include "parser.h"
 #include "utils.h"
-#include "vec3.h"
 #include "ray.h"
 #include "hit_record.h"
 #include "camera.h"

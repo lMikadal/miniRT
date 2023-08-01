@@ -3,9 +3,7 @@
 // del
 void ft_print_data(t_info *info)
 {
-	t_sphere *tmp_sphere;
-	t_plane *tmp_plane;
-	t_cylinder *tmp_cylinder;
+	t_hittable_list *tmp;
 
 	if (info->ambient != NULL)
 	{
@@ -17,61 +15,46 @@ void ft_print_data(t_info *info)
 	if (info->camera != NULL)
 	{
 		printf("camera\n");
-		printf("point: %lf %lf %lf\n", info->camera->point[0], info->camera->point[1], info->camera->point[2]);
-		printf("vector: %lf %lf %lf\n", info->camera->vector[0], info->camera->vector[1], info->camera->vector[2]);
+		printf("point: %lf %lf %lf\n", info->camera->coordinates_point.x, info->camera->coordinates_point.y, info->camera->coordinates_point.z);
+		printf("vector: %lf %lf %lf\n", info->camera->normalized_vector.x, info->camera->normalized_vector.y, info->camera->normalized_vector.z);
 		printf("fov: %lf\n", info->camera->fov);
 		printf("--------------------------\n");
 	}
 	if (info->light != NULL)
 	{
 		printf("light\n");
-		printf("point: %lf %lf %lf\n", info->light->point[0], info->light->point[1], info->light->point[2]);
+		printf("point: %lf %lf %lf\n", info->light->coordinates_point.x, info->light->coordinates_point.y, info->light->coordinates_point.z);
 		printf("ratio: %lf\n", info->light->ratio);
 		printf("color: %d, %d, %d\n", info->light->color.r, info->light->color.g, info->light->color.b);
 		printf("--------------------------\n");
 	}
-	if (info->sphere != NULL)
+	tmp = info->hittable_list;
+	while (tmp != NULL)
 	{
-		tmp_sphere = info->sphere;
-
-		printf("sphere\n");
-		while (tmp_sphere != NULL)
+		if (tmp->type == PL)
 		{
-			printf("center: %lf %lf %lf\n", tmp_sphere->center[0], tmp_sphere->center[1], tmp_sphere->center[2]);
-			printf("diameter: %lf\n", tmp_sphere->diameter);
-			printf("color: %d, %d, %d\n", tmp_sphere->color.r, tmp_sphere->color.g, tmp_sphere->color.b);
-			tmp_sphere = tmp_sphere->next;
+			printf("plane\n");
+			printf("point: %lf %lf %lf\n", tmp->plane->coordinates_point.x, tmp->plane->coordinates_point.y, tmp->plane->coordinates_point.z);
+			printf("vector: %lf %lf %lf\n", tmp->plane->normalized_vector.x, tmp->plane->normalized_vector.y, tmp->plane->normalized_vector.z);
+			printf("color: %d, %d, %d\n", tmp->plane->color.r, tmp->plane->color.g, tmp->plane->color.b);
+		}
+		else if (tmp->type == SP)
+		{
+			printf("sphere\n");
+			printf("center: %lf %lf %lf\n", tmp->sphere->coordinates_center.x, tmp->sphere->coordinates_center.y, tmp->sphere->coordinates_center.z);
+			printf("diameter: %lf\n", tmp->sphere->diameter);
+			printf("color: %d, %d, %d\n", tmp->sphere->color.r, tmp->sphere->color.g, tmp->sphere->color.b);
+		}
+		else if (tmp->type == CY)
+		{
+			printf("cylinder\n");
+			printf("point: %lf %lf %lf\n", tmp->cylinder->coordinates_center.x, tmp->cylinder->coordinates_center.y, tmp->cylinder->coordinates_center.z);
+			printf("vector: %lf %lf %lf\n", tmp->cylinder->normalized_vector.x, tmp->cylinder->normalized_vector.y, tmp->cylinder->normalized_vector.z);
+			printf("diameter: %lf\n", tmp->cylinder->diameter);
+			printf("height: %lf\n", tmp->cylinder->height);
+			printf("color: %d, %d, %d\n", tmp->cylinder->color.r, tmp->cylinder->color.g, tmp->cylinder->color.b);
 		}
 		printf("--------------------------\n");
-	}
-	if (info->plane != NULL)
-	{
-		tmp_plane = info->plane;
-
-		printf("plane\n");
-		while (tmp_plane != NULL)
-		{
-			printf("point: %lf %lf %lf\n", tmp_plane->point[0], tmp_plane->point[1], tmp_plane->point[2]);
-			printf("vector: %lf %lf %lf\n", tmp_plane->vector[0], tmp_plane->vector[1], tmp_plane->vector[2]);
-			printf("color: %d, %d, %d\n", tmp_plane->color.r, tmp_plane->color.g, tmp_plane->color.b);
-			tmp_plane = tmp_plane->next;
-		}
-		printf("--------------------------\n");
-	}
-	if (info->cylinder != NULL)
-	{
-		tmp_cylinder = info->cylinder;
-
-		printf("cylinder\n");
-		while (tmp_cylinder != NULL)
-		{
-			printf("point: %lf %lf %lf\n", tmp_cylinder->center[0], tmp_cylinder->center[1], tmp_cylinder->center[2]);
-			printf("vector: %lf %lf %lf\n", tmp_cylinder->vector[0], tmp_cylinder->vector[1], tmp_cylinder->vector[2]);
-			printf("diameter: %lf\n", tmp_cylinder->diameter);
-			printf("height: %lf\n", tmp_cylinder->height);
-			printf("color: %d, %d, %d\n", tmp_cylinder->color.r, tmp_cylinder->color.g, tmp_cylinder->color.b);
-			tmp_cylinder = tmp_cylinder->next;
-		}
-		printf("--------------------------\n");
+		tmp = tmp->next;
 	}
 }

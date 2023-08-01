@@ -9,3 +9,15 @@ int ft_color(t_rgb color)
 	c += color.b;
 	return (c);
 }
+
+t_hittable_list *ft_malloc_hittable(int name)
+{
+	t_hittable_list *hittable;
+
+	hittable = (t_hittable_list *)malloc(sizeof(t_hittable_list));
+	if (hittable == NULL)
+		return (NULL);
+	hittable->type = name;
+	hittable->next = NULL;
+	return (hittable);
+}

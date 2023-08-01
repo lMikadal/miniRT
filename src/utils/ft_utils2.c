@@ -80,7 +80,7 @@ t_rgb ft_set_color(const char *s, t_info *info)
 	return (color);
 }
 
-void ft_set_point(double *point, char *data, t_info *info)
+void ft_set_point(t_v3d *point, char *data, t_info *info)
 {
 	char **split_data;
 	int i;
@@ -100,13 +100,13 @@ void ft_set_point(double *point, char *data, t_info *info)
 		ft_free_2d(split_data);
 		ft_error("Error point size", info);
 	}
-	point[0] = ft_atod(split_data[0], info);
-	point[1] = ft_atod(split_data[1], info);
-	point[2] = ft_atod(split_data[2], info);
+	point->x = ft_atod(split_data[0], info);
+	point->y = ft_atod(split_data[1], info);
+	point->z = ft_atod(split_data[2], info);
 	ft_free_2d(split_data);
 }
 
-void ft_set_vector(double *vector, char *data, t_info *info)
+void ft_set_vector(t_v3d *vector, char *data, t_info *info)
 {
 	char **split_data;
 	int i;
@@ -127,8 +127,8 @@ void ft_set_vector(double *vector, char *data, t_info *info)
 		ft_free_2d(split_data);
 		ft_error("Error vector size", info);
 	}
-	vector[0] = ft_atod(split_data[0], info);
-	vector[1] = ft_atod(split_data[1], info);
-	vector[2] = ft_atod(split_data[2], info);
+	vector->x = ft_atod(split_data[0], info);
+	vector->y = ft_atod(split_data[1], info);
+	vector->z = ft_atod(split_data[2], info);
 	ft_free_2d(split_data);
 }

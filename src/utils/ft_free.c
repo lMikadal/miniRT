@@ -22,34 +22,34 @@ void ft_free_2d(char **s)
 	free(s);
 }
 
-static void ft_free_info2(t_info *info)
-{
-	t_plane *tmp_plane;
-	t_cylinder *tmp_cylinder;
+// static void ft_free_info2(t_info *info)
+// {
+// 	t_plane *tmp_plane;
+// 	t_cylinder *tmp_cylinder;
 
-	if (info->plane != NULL)
-	{
-		while (info->plane)
-		{
-			tmp_plane = info->plane->next;
-			free(info->plane);
-			info->plane = tmp_plane;
-		}
-	}
-	if (info->cylinder != NULL)
-	{
-		while (info->cylinder)
-		{
-			tmp_cylinder = info->cylinder->next;
-			free(info->cylinder);
-			info->cylinder = tmp_cylinder;
-		}
-	}
-}
+// 	if (info->plane != NULL)
+// 	{
+// 		while (info->plane)
+// 		{
+// 			tmp_plane = info->plane->next;
+// 			free(info->plane);
+// 			info->plane = tmp_plane;
+// 		}
+// 	}
+// 	if (info->cylinder != NULL)
+// 	{
+// 		while (info->cylinder)
+// 		{
+// 			tmp_cylinder = info->cylinder->next;
+// 			free(info->cylinder);
+// 			info->cylinder = tmp_cylinder;
+// 		}
+// 	}
+// }
 
 void ft_free_info(t_info *info)
 {
-	t_sphere *tmp_sphere;
+	// t_sphere *tmp_sphere;
 
 	if (info->ambient != NULL)
 		free(info->ambient);
@@ -57,14 +57,14 @@ void ft_free_info(t_info *info)
 		free(info->camera);
 	if (info->light != NULL)
 		free(info->light);
-	if (info->sphere != NULL)
-	{
-		while (info->sphere)
-		{
-			tmp_sphere = info->sphere->next;
-			free(info->sphere);
-			info->sphere = tmp_sphere;
-		}
-	}
-	ft_free_info2(info);
+	// if (info->sphere != NULL)
+	// {
+	// 	while (info->sphere)
+	// 	{
+	// 		tmp_sphere = info->sphere->next;
+	// 		free(info->sphere);
+	// 		info->sphere = tmp_sphere;
+	// 	}
+	// }
+	// ft_free_info2(info);
 }

@@ -2,7 +2,7 @@
 
 int sphere(t_ray r, double t_min, double t_max, t_hit_record *rec, t_sphere *sp)
 {
-	t_v3d center = v3d_create(sp->center[0], sp->center[1], sp->center[2]);
+	t_v3d center = sp->coordinates_center;
 	double radius = sp->diameter / 2;
 
 	t_v3d oc = v3d_opr_minus(r.orig, center);

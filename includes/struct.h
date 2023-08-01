@@ -16,42 +16,39 @@ typedef struct s_ambient
 
 typedef struct s_camera
 {
-	double point[3];
-	double vector[3];
+	t_v3d coordinates_point;
+	t_v3d normalized_vector;
 	double fov;
 } t_camera;
 
 typedef struct s_light
 {
-	double point[3];
+	t_v3d coordinates_point;
 	double ratio;
 	t_rgb color;
 } t_light;
 
 typedef struct s_sphere
 {
-	double center[3];
+	t_v3d coordinates_center;
 	double diameter;
 	t_rgb color;
-	struct s_sphere *next;
 } t_sphere;
 
 typedef struct s_plane
 {
-	double point[3];
-	double vector[3];
+	t_v3d coordinates_point;
+	t_v3d normalized_vector;
 	t_rgb color;
-	struct s_plane *next;
 } t_plane;
 
 typedef struct s_cylinder
 {
-	double center[3];
-	double vector[3];
+	t_v3d coordinates_center;
+	t_v3d normalized_vector;
 	double diameter;
 	double height;
 	t_rgb color;
-	struct s_cylinder *next;
 } t_cylinder;
 
 typedef struct s_hittable_list
@@ -68,9 +65,6 @@ typedef struct s_info
 	t_ambient *ambient;
 	t_camera *camera;
 	t_light *light;
-	t_sphere *sphere;
-	t_plane *plane;
-	t_cylinder *cylinder;
 	t_hittable_list *hittable_list;
 	int count_ambient;
 	int count_camera;

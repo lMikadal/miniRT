@@ -22,25 +22,25 @@ void render(t_mlx *mlx, t_info *info)
 	int height = width / ratio;
 
 	// add shape
-	t_sphere *sp1 = (t_sphere *)malloc(sizeof(t_sphere));
-	sp1->center[0] = 0.0;
-	sp1->center[1] = 0.0;
-	sp1->center[2] = -1.0;
-	sp1->diameter = 1.0;
-	t_sphere *sp2 = (t_sphere *)malloc(sizeof(t_sphere));
-	sp2->center[0] = 0.0;
-	sp2->center[1] = -100.5;
-	sp2->center[2] = -1.0;
-	sp2->diameter = 200.0;
+	// t_sphere *sp1 = (t_sphere *)malloc(sizeof(t_sphere));
+	// sp1->center[0] = 0.0;
+	// sp1->center[1] = 0.0;
+	// sp1->center[2] = -1.0;
+	// sp1->diameter = 1.0;
+	// t_sphere *sp2 = (t_sphere *)malloc(sizeof(t_sphere));
+	// sp2->center[0] = 0.0;
+	// sp2->center[1] = -100.5;
+	// sp2->center[2] = -1.0;
+	// sp2->diameter = 200.0;
 
 	t_info new;
-	new.hittable_list = (t_hittable_list *)malloc(sizeof(t_hittable_list));
-	new.hittable_list->type = SP;
-	new.hittable_list->sphere = sp1;
-	new.hittable_list->next = (t_hittable_list *)malloc(sizeof(t_hittable_list));
-	new.hittable_list->next->type = SP;
-	new.hittable_list->next->sphere = sp2;
-	new.hittable_list->next->next = NULL;
+	// new.hittable_list = (t_hittable_list *)malloc(sizeof(t_hittable_list));
+	// new.hittable_list->type = SP;
+	// new.hittable_list->sphere = sp1;
+	// new.hittable_list->next = (t_hittable_list *)malloc(sizeof(t_hittable_list));
+	// new.hittable_list->next->type = SP;
+	// new.hittable_list->next->sphere = sp2;
+	// new.hittable_list->next->next = NULL;
 
 	// Camera
 	t_ca camera = create_camera(v3d_create(0.0, 0.0, 0.0), v3d_create(0.0, 0, 100.0), v3d_create(0.0, 1.0, 0.0), 90, ratio);
