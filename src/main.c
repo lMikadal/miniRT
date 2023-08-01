@@ -19,8 +19,7 @@ int main(int ac, char **av)
 	{
 		ft_init_info(&info);
 		ft_parser(&info, av[1]);
-		ft_print_data(&info);
-		// ft_write_map(av[1], &info);
+		ft_write_map(av[1], &info);
 	}
 	else
 		printf("Error argument\n");
