@@ -15,13 +15,13 @@ t_ca create_camera(t_v3d lookfrom, t_v3d lookat, t_v3d vup, double fov, double a
 	t_ca camera;
 
 	double theta = fov * PI / 180.0;
-	double h = tan(theta / 2);
-	double viewport_height = 2.0 * h;
-	double viewport_width = aspect_ratio * viewport_height;
+	// double h = tan(theta / 2);
+	// double viewport_height = 2.0 * h;
+	// double viewport_width = aspect_ratio * viewport_height;
 
-	// double w_l = tan(theta / 2);
-	// double viewport_width = 2.0 * w_l;
-	// double viewport_height = viewport_width / aspect_ratio;
+	double w_l = tan(theta / 2);
+	double viewport_width = 2.0 * w_l;
+	double viewport_height = viewport_width / aspect_ratio;
 
 	t_v3d w = v3d_unit_vec(v3d_opr_minus(lookfrom, lookat));
 	t_v3d u = v3d_unit_vec(v3d_cross(vup, w));

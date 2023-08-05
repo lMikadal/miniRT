@@ -1,24 +1,28 @@
 #include "minirt.h"
 
-t_v3d ray_color(t_ray r, t_info *world, int depth)
+t_rgb rgb_create(double r, double g, double b)
+{
+	t_rgb rgb;
+
+	rgb.r = r;
+	rgb.g = g;
+	rgb.b = b;
+
+	return (rgb);
+}
+
+t_rgb ray_color(t_ray r, t_info *world)
 {
 	t_hit_record rec;
-
-	if (depth <= 0)
-		return (v3d_create(0.0, 0.0, 0.0));
 
 	if (hittable_list(r, 0.001, INFINITY, &rec, world))
 	{
 		if (rec.type == PL)
-			return v3d_create(1, 1, 1);
+			return rgb_create(255, 255, 255);
 
-		t_v3d target = v3d_opr_plus(rec.p, rec.normal);
-		return (v3d_mult_double(ray_color(ray_create(rec.p, v3d_opr_minus(target, rec.p)), world, depth - 1), 0.5));
+		return (rgb_create(255, 0, 0));
 	}
-
-	t_v3d unit_dir = v3d_unit_vec(r.dir);
-	double t = 0.5 * (unit_dir.y + 1.0);
-	return (v3d_opr_plus(v3d_mult_double(v3d_create(1.0, 1.0, 1.0), 1.0 - t), v3d_mult_double(v3d_create(0.5, 0.7, 1.0), t)));
+	return (rgb_create(0, 0, 0));
 }
 
 void render(t_mlx *mlx, t_info *info)
@@ -28,10 +32,9 @@ void render(t_mlx *mlx, t_info *info)
 	double ratio = 16.0 / 9.0;
 	int width = HORIZON;
 	int height = width / ratio;
-	int max_depth = 50;
 
 	// Camera
-	t_ca camera = create_camera(v3d_create(-2.0, 2.0, 1.0), v3d_create(0.0, 0, -1.0), v3d_create(0.0, 1.0, 0.0), 90, ratio);
+	t_ca camera = create_camera(v3d_create(info->camera->coordinates_point.x, info->camera->coordinates_point.y, info->camera->coordinates_point.z), v3d_create(0.0, 0, -1.0), v3d_create(0.0, 1.0, 0.0), info->camera->fov, ratio);
 
 	for (int j = height - 1; j >= 0; --j)
 	{
@@ -41,13 +44,7 @@ void render(t_mlx *mlx, t_info *info)
 			double v = (double)j / (height - 1);
 
 			t_ray r = get_ray(u, v, camera);
-			t_v3d pix_color = ray_color(r, info, max_depth);
-
-			// wirte_color [pix_color];
-			t_rgb rgb;
-			rgb.r = (int)(255.99 * pix_color.x);
-			rgb.g = (int)(255.99 * pix_color.y);
-			rgb.b = (int)(255.99 * pix_color.z);
+			t_rgb rgb = ray_color(r, info);
 
 			// if (height - j != height)
 			ft_mlx_pixel_put(mlx, i, height - j, ft_color(rgb));

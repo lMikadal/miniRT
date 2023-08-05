@@ -7,7 +7,7 @@ int plane(t_ray r, double t_min, double t_max, t_hit_record *rec, t_plane *pl)
 
 	if (fabs(denom) > 1e-6)
 	{
-		t = v3d_dot(v3d_opr_minus(r.orig, pl->coordinates_point), pl->normalized_vector) / denom;
+		t = v3d_dot(v3d_opr_minus(pl->coordinates_point, r.orig), pl->normalized_vector) / denom;
 		if (t < 0)
 			return (F);
 	}
