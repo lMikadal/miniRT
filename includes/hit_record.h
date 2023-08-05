@@ -3,10 +3,11 @@
 
 typedef struct s_hit_record
 {
-    t_v3d p;
-    t_v3d normal;
-    double t;
-    int front_face;
+	t_v3d p;
+	t_v3d normal;
+	double t;
+	int front_face;
+	int type;
 } t_hit_record;
 
 void set_facae_normal(t_ray r, t_v3d outward_normal, t_hit_record *rec);

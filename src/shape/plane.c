@@ -1,16 +1,22 @@
 #include "minirt.h"
 
-int plane(t_ray r)
+int plane(t_ray r, double t_min, double t_max, t_hit_record *rec, t_plane *pl)
 {
-    t_v3d point = v3d_create(0, 0, -10.0);
-    t_v3d normal = v3d_create(1, 1, 0);
+	double t;
+	double denom = v3d_dot(pl->normalized_vector, r.dir);
 
-    double denom = v3d_dot(normal, r.dir);
-    if (fabs(denom) > 1e-6)
-    {
-        double t = v3d_dot(v3d_opr_minus(point, r.orig), normal) / denom;
-        if (t >= 0)
-            return (1);
-    }
-    return (0);
+	if (fabs(denom) > 1e-6)
+	{
+		t = v3d_dot(v3d_opr_minus(r.orig, pl->coordinates_point), pl->normalized_vector) / denom;
+		if (t < 0)
+			return (F);
+	}
+
+	if (t < t_min || t > t_max)
+		return (F);
+
+	rec->t = t;
+	rec->p = ray_at(r, rec->t);
+
+	return (T);
 }

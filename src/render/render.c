@@ -9,6 +9,9 @@ t_v3d ray_color(t_ray r, t_info *world, int depth)
 
 	if (hittable_list(r, 0.001, INFINITY, &rec, world))
 	{
+		if (rec.type == PL)
+			return v3d_create(1, 1, 1);
+
 		t_v3d target = v3d_opr_plus(rec.p, rec.normal);
 		return (v3d_mult_double(ray_color(ray_create(rec.p, v3d_opr_minus(target, rec.p)), world, depth - 1), 0.5));
 	}
@@ -42,9 +45,9 @@ void render(t_mlx *mlx, t_info *info)
 
 			// wirte_color [pix_color];
 			t_rgb rgb;
-			rgb.r = 255.99 * pix_color.x;
-			rgb.g = 255.99 * pix_color.y;
-			rgb.b = 255.99 * pix_color.z;
+			rgb.r = (int)(255.99 * pix_color.x);
+			rgb.g = (int)(255.99 * pix_color.y);
+			rgb.b = (int)(255.99 * pix_color.z);
 
 			// if (height - j != height)
 			ft_mlx_pixel_put(mlx, i, height - j, ft_color(rgb));
