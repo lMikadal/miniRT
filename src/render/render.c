@@ -29,7 +29,7 @@ void render(t_mlx *mlx, t_info *info)
 	int height = width / ratio;
 
 	// Camera
-	t_ca camera = create_camera(v3d_create(info->camera->coordinates_point.x, info->camera->coordinates_point.y, info->camera->coordinates_point.z), v3d_create(0.0, 0, -1.0), v3d_create(0.0, 1.0, 0.0), info->camera->fov, ratio);
+	t_ca camera = create_camera(v3d_create(info->camera->coordinates_point.x, info->camera->coordinates_point.y, info->camera->coordinates_point.z), v3d_create(0.0, 0, -1.0), v3d_create(info->camera->normalized_vector.x, info->camera->normalized_vector.y, info->camera->normalized_vector.z), info->camera->fov, ratio);
 
 	for (int j = height - 1; j >= 0; --j)
 	{
