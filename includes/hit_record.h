@@ -8,6 +8,7 @@ typedef struct s_hit_record
 	double t;
 	int front_face;
 	int type;
+	t_rgb color;
 } t_hit_record;
 
 void set_facae_normal(t_ray r, t_v3d outward_normal, t_hit_record *rec);

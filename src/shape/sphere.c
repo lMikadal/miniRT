@@ -24,6 +24,7 @@ int sphere(t_ray r, double t_min, double t_max, t_hit_record *rec, t_sphere *sp)
 	}
 	rec->t = root;
 	rec->p = ray_at(r, rec->t);
+	rec->color = rgb_create(sp->color.r, sp->color.g, sp->color.b);
 	t_v3d outward_normal = v3d_div_double(v3d_opr_minus(rec->p, center), radius);
 	set_facae_normal(r, outward_normal, rec);
 
