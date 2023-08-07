@@ -15,7 +15,7 @@ t_rgb ray_color(t_ray r, t_info *world)
 {
 	t_hit_record rec;
 
-	if (hittable_list(r, 0.001, INFINITY, &rec, world))
+	if (hittable_list(r, 0.000, INFINITY, &rec, world))
 		return (rec.color);
 	return (rgb_create(0, 0, 0));
 }

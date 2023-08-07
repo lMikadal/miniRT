@@ -3,6 +3,6 @@
 
 int sphere(t_ray r, double t_min, double t_max, t_hit_record *rec, t_sphere *sp);
 int plane(t_ray r, double t_min, double t_max, t_hit_record *rec, t_plane *pl);
-int cylinder(t_ray r);
+int cylinder(t_ray r, double t_min, double t_max, t_hit_record *rec, t_cylinder *cy);
 
 #endif

@@ -16,10 +16,10 @@ int sphere(t_ray r, double t_min, double t_max, t_hit_record *rec, t_sphere *sp)
 
 	double sqrtd = sqrt(discriminant);
 	double root = ((b * -1) - sqrtd) / (2.0 * a);
-	if (root < t_min || t_max < root)
+	if (root < t_min || t_max <= root)
 	{
 		root = ((b * -1) + sqrtd) / (2.0 * a);
-		if (root < t_min || t_max < root)
+		if (root < t_min || t_max <= root)
 			return (F);
 	}
 	rec->t = root;

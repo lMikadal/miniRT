@@ -43,8 +43,19 @@ int hittable_list(t_ray r, double t_min, double t_max, t_hit_record *rec, t_info
 				*rec = temp_rec;
 			}
 		}
+		else if (hittable->type == CY)
+		{
+			if (cylinder(r, t_min, closest_so_far, &temp_rec, hittable->cylinder))
+			{
+				hit_anything = T;
+				closest_so_far = temp_rec.t;
+				temp_rec.type = CY;
+				*rec = temp_rec;
+			}
+		}
 		hittable = hittable->next;
 	}
+	// printf("type: %d, t_max: %lf\n", rec->type, closest_so_far);
 
 	return (hit_anything);
 }
