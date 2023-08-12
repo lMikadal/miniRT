@@ -29,7 +29,7 @@ int hittable_list(t_ray r, double t_min, double t_max, t_hit_record *rec, t_info
 			{
 				hit_anything = T;
 				closest_so_far = temp_rec.t;
-				temp_rec.type = SP;
+				// temp_rec.type = SP;
 				*rec = temp_rec;
 			}
 		}
@@ -39,7 +39,7 @@ int hittable_list(t_ray r, double t_min, double t_max, t_hit_record *rec, t_info
 			{
 				hit_anything = T;
 				closest_so_far = temp_rec.t;
-				temp_rec.type = PL;
+				// temp_rec.type = PL;
 				*rec = temp_rec;
 			}
 		}
@@ -49,7 +49,7 @@ int hittable_list(t_ray r, double t_min, double t_max, t_hit_record *rec, t_info
 			{
 				hit_anything = T;
 				closest_so_far = temp_rec.t;
-				temp_rec.type = CY;
+				// temp_rec.type = CY;
 				*rec = temp_rec;
 			}
 		}
