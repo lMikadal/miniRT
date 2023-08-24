@@ -66,6 +66,7 @@ static void ft_set_plane2(t_plane **plane, char **data, t_info *info)
 		return;
 	ft_set_point(&(plane[0]->coordinates_point), data[1], info);
 	ft_set_vector(&(plane[0]->normalized_vector), data[2], info);
+	plane[0]->normalized_vector = v3d_unit_vec(plane[0]->normalized_vector);
 	plane[0]->color = ft_set_color(data[3], info);
 }
 
