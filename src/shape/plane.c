@@ -15,7 +15,6 @@ int plane(t_ray r, double t_min, double t_max, t_hit_record *rec, t_plane *pl)
 		return (F);
 
 	rec->t = t;
-	// rec->p = ray_at(r, rec->t);
 	rec->color = rgb_create(pl->color.r, pl->color.g, pl->color.b);
 
 	return (T);
