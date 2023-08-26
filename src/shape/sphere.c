@@ -7,6 +7,7 @@ int sphere(t_ray r, double t_min, double t_max, t_hit_record *rec, t_sphere *sp)
 	double dis;
 	double sqrtd;
 	double t;
+	
 
 	oc = v3d_opr_minus(r.orig, sp->coordinates_center);
 	ob[0] = v3d_dot(r.dir, r.dir);
