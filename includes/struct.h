@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   struct.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pmikada <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/27 03:28:23 by pmikada           #+#    #+#             */
+/*   Updated: 2023/08/27 03:28:25 by pmikada          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef STRUCT_H
 # define STRUCT_H
 
@@ -62,7 +74,7 @@ typedef struct s_hittable_list
 
 typedef struct s_info
 {
-	t_ambient 		*ambient;
+	t_ambient		*ambient;
 	t_camera		*camera;
 	t_light			*light;
 	t_hittable_list	*hittable_list;

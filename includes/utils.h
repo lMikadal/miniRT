@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pmikada <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/27 03:27:32 by pmikada           #+#    #+#             */
+/*   Updated: 2023/08/27 03:27:35 by pmikada          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef UTILS_H
 # define UTILS_H
 
@@ -15,8 +27,8 @@ char			**ft_split_whitespace(const char *s);
 char			**ft_split(const char *s, char c);
 int				ft_strlen(const char *s);
 double			ft_atod(const char *s, t_info *info);
-int 			ft_atoi(const char *s, t_info *info);
-t_rgb 			ft_set_color(const char *s, t_info *info);
+int				ft_atoi(const char *s, t_info *info);
+t_rgb			ft_set_color(const char *s, t_info *info);
 void			ft_set_point(t_v3d *point, char *data, t_info *info);
 void			ft_set_vector(t_v3d *vector, char *data, t_info *info);
 int				ft_color(t_rgb color);
