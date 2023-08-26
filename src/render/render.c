@@ -1,17 +1,16 @@
 #include "minirt.h"
 
-t_rgb rgb_create(double r, double g, double b)
+static t_rgb rgb_create(double r, double g, double b)
 {
 	t_rgb rgb;
 
 	rgb.r = r;
 	rgb.g = g;
 	rgb.b = b;
-
 	return (rgb);
 }
 
-t_rgb ray_color(t_ray r, t_info *world)
+static t_rgb ray_color(t_ray r, t_info *world)
 {
 	t_hit_record rec;
 
@@ -22,29 +21,26 @@ t_rgb ray_color(t_ray r, t_info *world)
 
 void render(t_mlx *mlx, t_info *info)
 {
+	double ratio;
+	int width;
+	int height;
+	t_ca camera;
+	int loop[2];
+	double view[2];
 
-	// Image size
-	double ratio = 16.0 / 9.0;
-	int width = HORIZON;
-	int height = width / ratio;
-
-	// Camera
-	t_ca camera = create_camera(v3d_create(info->camera->coordinates_point.x, info->camera->coordinates_point.y, info->camera->coordinates_point.z), v3d_create(0.0, 0, -1.0), v3d_create(info->camera->normalized_vector.x, info->camera->normalized_vector.y, info->camera->normalized_vector.z), info->camera->fov, ratio);
-
-	for (int j = height - 1; j >= 0; --j)
+	ratio = 16.0 / 9.0;
+	width = HORIZON;
+	height = width / ratio;
+	camera = create_camera(info->camera->coordinates_point, v3d_create(0.0, 0, -1.0), info->camera->normalized_vector, info->camera->fov, ratio);
+	loop[0] = height - 1;
+	while (loop[0]-- >= 0)
 	{
-		for (int i = 0; i < width; ++i)
+		loop[1] = 0;
+		while (loop[1]++ < width)
 		{
-			double u = (double)i / (width - 1);
-			double v = (double)j / (height - 1);
-
-			t_ray r = get_ray(u, v, camera);
-			t_rgb rgb = ray_color(r, info);
-
-			// if (height - j != height)
-			ft_mlx_pixel_put(mlx, i, height - j, ft_color(rgb));
-			// else
-			// 	ft_mlx_pixel_put(mlx, i, 0, ft_color(rgb));
+			view[0] = (double)loop[1] / (width - 1);
+			view[1] = (double)loop[0] / (height - 1);
+			ft_mlx_pixel_put(mlx, loop[1], height - loop[0], ft_color(ray_color(get_ray(view[0], view[1], camera), info)));
 		}
 	}
 }

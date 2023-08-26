@@ -23,11 +23,7 @@ int hit_cap(t_cylinder *cy, t_ray r, double t_min, double dot, t_hit_record *rec
 				v = v3d_opr_minus(p, bottom);
 			double v_dot = v3d_dot(v, v);
 			if (sqrtf(v_dot) <= cy->diameter / 2)
-			{
-				rec->t = t;
-				rec->color = rgb_create(cy->color.r, cy->color.g, cy->color.b);
-				return (T);
-			}
+				return (set_rec(rec, t, cy->color));
 		}
 	}
 	return (F);
@@ -71,10 +67,6 @@ int cylinder(t_ray r, double t_min, double t_max, t_hit_record *rec, t_cylinder 
 		t = t2;
 	double dot;
 	if (t >= t_min && t <= t_max && hit_body(r, t, cy, &dot) != F)
-	{
-		rec->t = t;
-		rec->color = rgb_create(cy->color.r, cy->color.g, cy->color.b);
-		return (T);
-	}
+		return (set_rec(rec, t, cy->color));
 	return (hit_cap(cy, r, t_min, dot, rec));
 }

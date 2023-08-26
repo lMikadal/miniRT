@@ -11,7 +11,6 @@ typedef struct s_hit_record
 	t_rgb color;
 } t_hit_record;
 
-void set_facae_normal(t_ray r, t_v3d outward_normal, t_hit_record *rec);
 int hittable_list(t_ray r, double t_min, double t_max, t_hit_record *rec, t_info *info);
 
 #endif
