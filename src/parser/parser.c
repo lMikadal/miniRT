@@ -12,9 +12,9 @@
 
 #include "minirt.h"
 
-static void	ft_insert_data(t_info *info, char **data)
+static void ft_insert_data(t_info *info, char **data)
 {
-	int	len;
+	int len;
 
 	len = ft_strlen(data[0]);
 	if (len == 1 && ft_strcmp(data[0], "A") == F)
@@ -33,11 +33,11 @@ static void	ft_insert_data(t_info *info, char **data)
 		ft_error("Error file", info);
 }
 
-void	ft_parser(t_info *info, char *file)
+void ft_parser(t_info *info, char *file)
 {
-	int		open_fd;
-	char	*data;
-	char	**split_data;
+	int open_fd;
+	char *data;
+	char **split_data;
 
 	open_fd = open(file, O_RDONLY);
 	if (open_fd < 0)
@@ -46,7 +46,7 @@ void	ft_parser(t_info *info, char *file)
 	{
 		data = get_next_line(open_fd);
 		if (data == NULL)
-			break ;
+			break;
 		split_data = ft_split_whitespace(data);
 		if (split_data[0] != NULL)
 			ft_insert_data(info, split_data);

@@ -1,18 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   set.c                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: pmikada <marvin@42.fr>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/27 00:28:12 by pmikada           #+#    #+#             */
-/*   Updated: 2023/08/27 00:28:13 by pmikada          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minirt.h"
 
-int	set_rec(t_hit_record *rec, double t, t_rgb color)
+int set_rec(t_hit_record *rec, double t, t_rgb color)
 {
 	rec->t = t;
 	rec->color = color;

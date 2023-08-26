@@ -12,9 +12,9 @@
 
 #include "minirt.h"
 
-int	ft_strlen(const char *s)
+int ft_strlen(const char *s)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	if (s == NULL)
@@ -24,16 +24,16 @@ int	ft_strlen(const char *s)
 	return (i);
 }
 
-static int	read_units(const char *s, int i, double *sum)
+static int read_units(const char *s, int i, double *sum)
 {
 	while (s[i] && s[i] >= '0' && s[i] <= '9')
 		*sum = (*sum * 10) + (s[i++] - '0');
 	return (i);
 }
 
-static double	ft_pow(double n, int p)
+static double ft_pow(double n, int p)
 {
-	double	sum;
+	double sum;
 
 	sum = 1.0;
 	while (p-- > 0)
@@ -41,9 +41,9 @@ static double	ft_pow(double n, int p)
 	return (sum);
 }
 
-static double	read_decimals(const char *str, int i, int d_power)
+static double read_decimals(const char *str, int i, int d_power)
 {
-	double	sum;
+	double sum;
 
 	sum = 0.0;
 	while (str[i] && str[i] >= '0' && str[i] <= '9')
@@ -51,11 +51,11 @@ static double	read_decimals(const char *str, int i, int d_power)
 	return (sum);
 }
 
-double	ft_atod(const char *s, t_info *info)
+double ft_atod(const char *s, t_info *info)
 {
-	int		i;
-	double	sum;
-	int		m;
+	int i;
+	double sum;
+	int m;
 
 	if (ft_str_is_digit(s) == F)
 		ft_error("Error is not digit", info);

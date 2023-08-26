@@ -12,11 +12,11 @@
 
 #include "minirt.h"
 
-int	ft_atoi(const char *s, t_info *info)
+int ft_atoi(const char *s, t_info *info)
 {
-	int	i;
-	int	m;
-	int	sum;
+	int i;
+	int m;
+	int sum;
 
 	if (ft_str_is_digit(s) == F)
 		ft_error("Error is not digit", info);
@@ -34,10 +34,10 @@ int	ft_atoi(const char *s, t_info *info)
 	return (sum * m);
 }
 
-static int	ft_check_str(const char *data)
+static int ft_check_str(const char *data)
 {
-	int	i;
-	int	count;
+	int i;
+	int count;
 
 	i = -1;
 	count = 0;
@@ -51,17 +51,17 @@ static int	ft_check_str(const char *data)
 	return (T);
 }
 
-t_rgb	ft_set_color(const char *s, t_info *info)
+t_rgb ft_set_color(const char *s, t_info *info)
 {
-	t_rgb	color;
-	char	**split_color;
-	int		i;
+	t_rgb color;
+	char **split_color;
+	int i;
 
 	split_color = ft_split(s, ',');
 	i = -1;
 	while (split_color[++i])
 	{
-		if (ft_str_is_digit(split_color[i]) == F || \
+		if (ft_str_is_digit(split_color[i]) == F ||
 			ft_range_double(0, 255, ft_atod(split_color[i], info)) == F)
 		{
 			ft_free_2d(split_color);
@@ -80,10 +80,10 @@ t_rgb	ft_set_color(const char *s, t_info *info)
 	return (color);
 }
 
-void	ft_set_point(t_v3d *point, char *data, t_info *info)
+void ft_set_point(t_v3d *point, char *data, t_info *info)
 {
-	char	**split_data;
-	int		i;
+	char **split_data;
+	int i;
 
 	split_data = ft_split(data, ',');
 	i = -1;
@@ -106,16 +106,16 @@ void	ft_set_point(t_v3d *point, char *data, t_info *info)
 	ft_free_2d(split_data);
 }
 
-void	ft_set_vector(t_v3d *vector, char *data, t_info *info)
+void ft_set_vector(t_v3d *vector, char *data, t_info *info)
 {
-	char	**split_data;
-	int		i;
+	char **split_data;
+	int i;
 
 	split_data = ft_split(data, ',');
 	i = -1;
 	while (split_data[++i])
 	{
-		if (ft_str_is_digit(split_data[i]) == F || \
+		if (ft_str_is_digit(split_data[i]) == F ||
 			ft_range_double(-1.0, 1.0, ft_atod(split_data[i], info)) == F)
 		{
 			ft_free_2d(split_data);
