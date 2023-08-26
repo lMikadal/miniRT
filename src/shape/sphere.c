@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sphere.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pmikada <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/27 03:13:46 by pmikada           #+#    #+#             */
+/*   Updated: 2023/08/27 03:13:48 by pmikada          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 int	sphere(t_ray r, double t_max, t_hit_record *rec, t_sphere *sp)
@@ -7,7 +19,7 @@ int	sphere(t_ray r, double t_max, t_hit_record *rec, t_sphere *sp)
 	double	dis;
 	double	sqrtd;
 	double	t;
-	
+
 	oc = v3d_opr_minus(r.orig, sp->coordinates_center);
 	ob[0] = v3d_dot(r.dir, r.dir);
 	ob[1] = 2.0 * v3d_dot(oc, r.dir);
