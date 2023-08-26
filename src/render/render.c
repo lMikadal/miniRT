@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pmikada <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/27 03:39:08 by pmikada           #+#    #+#             */
+/*   Updated: 2023/08/27 03:39:10 by pmikada          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
-static t_rgb rgb_create(double r, double g, double b)
+static t_rgb	rgb_create(double r, double g, double b)
 {
-	t_rgb rgb;
+	t_rgb	rgb;
 
 	rgb.r = r;
 	rgb.g = g;
@@ -10,16 +22,16 @@ static t_rgb rgb_create(double r, double g, double b)
 	return (rgb);
 }
 
-static t_rgb ray_color(t_ray r, t_info *world)
+static t_rgb	ray_color(t_ray r, t_info *world)
 {
-	t_hit_record rec;
+	t_hit_record	rec;
 
-	if (hittable_list(r, 0.0, INFINITY, &rec, world))
+	if (hittable_list(r, INFINITY, &rec, world))
 		return (rec.color);
 	return (rgb_create(0, 0, 0));
 }
 
-void render(t_mlx *mlx, t_info *info)
+void	render(t_mlx *mlx, t_info *info)
 {
 	double ratio;
 	int width;

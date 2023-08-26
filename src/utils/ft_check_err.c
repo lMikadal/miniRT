@@ -12,16 +12,16 @@
 
 #include "minirt.h"
 
-void ft_error(const char *c, t_info *info)
+void	ft_error(const char *c, t_info *info)
 {
 	printf("%s\n", c);
 	ft_free_info(info);
 	exit(0);
 }
 
-void ft_check_len_data(char **data, int len, t_info *info)
+void	ft_check_len_data(char **data, int len, t_info *info)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (data[i])
