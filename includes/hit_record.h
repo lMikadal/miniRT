@@ -11,6 +11,6 @@ typedef struct s_hit_record
 	t_rgb color;
 } t_hit_record;
 
-int hittable_list(t_ray r, double t_min, double t_max, t_hit_record *rec, t_info *info);
+int hittable_list(t_ray r, double t_max, t_hit_record *rec, t_info *info);
 
 #endif

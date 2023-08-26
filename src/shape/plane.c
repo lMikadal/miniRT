@@ -1,9 +1,9 @@
 #include "minirt.h"
 
-int plane(t_ray r, double t_min, double t_max, t_hit_record *rec, t_plane *pl)
+int	plane(t_ray r, double t_max, t_hit_record *rec, t_plane *pl)
 {
-	double t;
-	double denom;
+	double	t;
+	double	denom;
 
 	denom = v3d_dot(pl->normalized_vector, r.dir);
 	if (fabs(denom) > 1e-6)
@@ -12,7 +12,7 @@ int plane(t_ray r, double t_min, double t_max, t_hit_record *rec, t_plane *pl)
 		if (t < 0.0)
 			return (F);
 	}
-	if (t <= t_min || t >= t_max)
+	if (t <= MIN || t >= t_max)
 		return (F);
 	return (set_rec(rec, t, pl->color));
 }

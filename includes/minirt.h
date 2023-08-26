@@ -19,6 +19,7 @@
 
 #define T 1
 #define F 0
+#define MIN 0.0
 #define HORIZON 400
 #define VERTICAL 225
 #define ESC 53
