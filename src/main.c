@@ -1,6 +1,6 @@
 #include "minirt.h"
 
-static void ft_init_info(t_info *info)
+static void	ft_init_info(t_info *info)
 {
 	info->ambient = NULL;
 	info->camera = NULL;
@@ -11,9 +11,9 @@ static void ft_init_info(t_info *info)
 	info->count_light = 1;
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	t_info info;
+	t_info	info;
 
 	if (ac == 2)
 	{
