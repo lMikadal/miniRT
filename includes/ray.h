@@ -11,15 +11,15 @@
 /* ************************************************************************** */
 
 #ifndef RAY_H
-#define RAY_H
+# define RAY_H
 
 typedef struct s_ray
 {
-	t_v3d orig;
-	t_v3d dir;
-} t_ray;
+	t_v3d	orig;
+	t_v3d	dir;
+}	t_ray;
 
-t_ray ray_create(t_v3d o, t_v3d d);
-t_v3d ray_at(t_ray r, double t);
+t_ray	ray_create(t_v3d o, t_v3d d);
+t_v3d	ray_at(t_ray r, double t);
 
 #endif
