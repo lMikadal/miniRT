@@ -42,7 +42,7 @@ void ft_print_data(t_info *info)
 		{
 			printf("sphere\n");
 			printf("center: %lf %lf %lf\n", tmp->sphere->coordinates_center.x, tmp->sphere->coordinates_center.y, tmp->sphere->coordinates_center.z);
-			printf("diameter: %lf\n", tmp->sphere->diameter);
+			printf("diameter: %lf\n", tmp->sphere->radius);
 			printf("color: %d, %d, %d\n", tmp->sphere->color.r, tmp->sphere->color.g, tmp->sphere->color.b);
 		}
 		else if (tmp->type == CY)

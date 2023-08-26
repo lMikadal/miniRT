@@ -18,7 +18,7 @@ static void ft_set_sphere2(t_sphere **sphere, char **data, t_info *info)
 	if (sphere == NULL)
 		return;
 	ft_set_point(&(sphere[0]->coordinates_center), data[1], info);
-	sphere[0]->diameter = ft_atod(data[2], info);
+	sphere[0]->radius = ft_atod(data[2], info) / 2;
 	sphere[0]->color = ft_set_color(data[3], info);
 }
 
