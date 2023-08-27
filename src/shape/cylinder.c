@@ -1,73 +1,99 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cylinder.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pmikada <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/27 14:24:10 by pmikada           #+#    #+#             */
+/*   Updated: 2023/08/27 14:24:11 by pmikada          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
-int hit_cap(t_cylinder *cy, t_ray r, double t_min, double dot, t_hit_record *rec)
+static void	find_top_bottom(t_v3d *tb, t_cylinder *cy)
 {
-	double denom = v3d_dot(cy->normalized_vector, r.dir);
-	double t;
-	t_v3d half_h = v3d_mult_double(cy->normalized_vector, cy->height / 2);
-	t_v3d top = v3d_opr_plus(cy->coordinates_center, half_h);
-	t_v3d bottom = v3d_opr_minus(cy->coordinates_center, half_h);
-	if (fabs(denom) >= t_min)
+	t_v3d	half_h;
+
+	half_h = v3d_mult_double(cy->normalized_vector, cy->height / 2);
+	tb[0] = v3d_opr_plus(cy->coordinates_center, half_h);
+	tb[1] = v3d_opr_minus(cy->coordinates_center, half_h);
+}
+
+static t_v3d	find_t_dot(double dot, t_cylinder *cy, t_v3d tb[])
+{
+	if (dot >= cy->height / 2)
+		return (tb[0]);
+	return (tb[1]);
+}
+
+int	hit_cap(t_cylinder *cy, t_ray r, double dot, t_hit_record *rec)
+{
+	double	denom;
+	double	t;
+	t_v3d	tb[2];
+	t_v3d	v;
+	t_v3d	t_dot;
+
+	denom = v3d_dot(cy->normalized_vector, r.dir);
+	find_top_bottom(tb, cy);
+	if (fabs(denom) >= MIN)
 	{
 		if (dot >= cy->height / 2)
-			t = v3d_dot(v3d_opr_minus(top, r.orig), cy->normalized_vector) / denom;
-		else if (dot <= (cy->height * -1) / 2)
-			t = v3d_dot(v3d_opr_minus(bottom, r.orig), cy->normalized_vector) / denom;
-		if (t >= t_min)
+			t = v3d_dot(v3d_opr_minus(tb[0], r.orig), \
+				cy->normalized_vector) / denom;
+		else if (dot < (cy->height * -1) / 2)
+			t = v3d_dot(v3d_opr_minus(tb[1], r.orig), \
+				cy->normalized_vector) / denom;
+		if (t > MIN)
 		{
-			t_v3d p = ray_at(r, t);
-			t_v3d v;
-			if (dot >= cy->height / 2)
-				v = v3d_opr_minus(p, top);
-			else
-				v = v3d_opr_minus(p, bottom);
-			double v_dot = v3d_dot(v, v);
-			if (sqrtf(v_dot) <= cy->diameter / 2)
+			t_dot = find_t_dot(dot, cy, tb);
+			v = v3d_opr_minus(ray_at(r, t), t_dot); 
+			if (sqrtf(v3d_dot(v, v)) <= cy->radius)
 				return (set_rec(rec, t, cy->color));
 		}
 	}
 	return (F);
 }
 
-int hit_body(t_ray r, double t, t_cylinder *cy, double *dot)
+int	hit_body(t_ray r, double t, t_cylinder *cy, double *dot)
 {
-	t_v3d point = ray_at(r, t);
-	t_v3d ori_diff = v3d_opr_minus(point, cy->coordinates_center);
-	*dot = v3d_dot(ori_diff, cy->normalized_vector);
+	t_v3d	point;
+	t_v3d	ori_diff;
 
+	point = ray_at(r, t);
+	ori_diff = v3d_opr_minus(point, cy->coordinates_center);
+	*dot = v3d_dot(ori_diff, cy->normalized_vector);
 	if (fabs(*dot) >= cy->height / 2)
 		return (F);
 	return (T);
 }
 
-int cylinder(t_ray r, double t_max, t_hit_record *rec, t_cylinder *cy)
+int	cylinder(t_ray r, double t_max, t_hit_record *rec, t_cylinder *cy)
 {
-	double radius = cy->diameter / 2;
-	t_v3d oc = v3d_opr_minus(r.orig, cy->coordinates_center);
+	t_v3d	oc;
+	double	data[3];
+	double	discrim;
+	double	t[3];
+	double	dot;
 
-	double sub_a = pow(v3d_dot(r.dir, cy->normalized_vector), 2);
-	double a = v3d_dot(r.dir, r.dir) - sub_a;
-
-	double sub_b = v3d_dot(r.dir, cy->normalized_vector) * v3d_dot(oc, cy->normalized_vector);
-	double b = (v3d_dot(r.dir, oc) - sub_b);
-
-	double sub_c = pow(v3d_dot(oc, cy->normalized_vector), 2);
-	double c = v3d_dot(oc, oc) - sub_c - (radius * radius);
-
-	double discrim = (b * b) - (a * c);
+	oc = v3d_opr_minus(r.orig, cy->coordinates_center);
+	data[0] = v3d_dot(r.dir, r.dir) - \
+		pow(v3d_dot(r.dir, cy->normalized_vector), 2);
+	data[1] = (v3d_dot(r.dir, oc) - v3d_dot(r.dir, cy->normalized_vector) \
+		* v3d_dot(oc, cy->normalized_vector));
+	data[2] = v3d_dot(oc, oc) - pow(v3d_dot(oc, cy->normalized_vector), 2) \
+		- (cy->radius * cy->radius);
+	discrim = (data[1] * data[1]) - (data[0] * data[2]);
 	if (discrim < 0)
 		return (F);
-
-	double sqrtd = sqrt(discrim);
-	double t1 = ((b * -1) - sqrtd) / a;
-	double t2 = ((b * -1) + sqrtd) / a;
-	double t = t1;
-
-	if (t1 > t2)
-		t = t2;
-	double dot;
-	if (t >= MIN && t <= t_max && hit_body(r, t, cy, &dot) != F)
-		return (set_rec(rec, t, cy->color));
-	return (F);
-	// return (hit_cap(cy, r, t_min, dot, rec));
+	t[1] = ((data[1] * -1) - sqrt(discrim)) / data[0];
+	t[2] = ((data[1] * -1) + sqrt(discrim)) / data[0];
+	t[0] = t[1];
+	if (t[1] > t[2])
+		t[0] = t[2];
+	if (t[0] >= MIN && t[0] <= t_max && hit_body(r, t[0], cy, &dot) != F)
+		return (set_rec(rec, t[0], cy->color));
+	return (hit_cap(cy, r, dot, rec));
 }

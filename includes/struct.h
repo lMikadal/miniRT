@@ -58,7 +58,7 @@ typedef struct s_cylinder
 {
 	t_v3d	coordinates_center;
 	t_v3d	normalized_vector;
-	double	diameter;
+	double	radius;
 	double	height;
 	t_rgb	color;
 }	t_cylinder;
