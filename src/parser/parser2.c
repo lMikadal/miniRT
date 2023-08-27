@@ -51,7 +51,7 @@ static void	ft_set_cylinder2(t_cylinder **cylinder, char **data, t_info *info)
 	ft_set_vector(&(cylinder[0]->normalized_vector), data[2], info);
 	cylinder[0]->normalized_vector = \
 		v3d_unit_vec(cylinder[0]->normalized_vector);
-	cylinder[0]->diameter = ft_atod(data[3], info);
+	cylinder[0]->radius = ft_atod(data[3], info) / 2;
 	cylinder[0]->height = ft_atod(data[4], info);
 	cylinder[0]->color = ft_set_color(data[5], info);
 }

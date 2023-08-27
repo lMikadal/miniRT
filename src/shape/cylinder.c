@@ -22,7 +22,7 @@ int hit_cap(t_cylinder *cy, t_ray r, double t_min, double dot, t_hit_record *rec
 			else
 				v = v3d_opr_minus(p, bottom);
 			double v_dot = v3d_dot(v, v);
-			if (sqrtf(v_dot) <= cy->diameter / 2)
+			if (sqrtf(v_dot) <= cy->radius)
 				return (set_rec(rec, t, cy->color));
 		}
 	}
@@ -42,7 +42,6 @@ int hit_body(t_ray r, double t, t_cylinder *cy, double *dot)
 
 int cylinder(t_ray r, double t_max, t_hit_record *rec, t_cylinder *cy)
 {
-	double radius = cy->diameter / 2;
 	t_v3d oc = v3d_opr_minus(r.orig, cy->coordinates_center);
 
 	double sub_a = pow(v3d_dot(r.dir, cy->normalized_vector), 2);
@@ -52,7 +51,7 @@ int cylinder(t_ray r, double t_max, t_hit_record *rec, t_cylinder *cy)
 	double b = (v3d_dot(r.dir, oc) - sub_b);
 
 	double sub_c = pow(v3d_dot(oc, cy->normalized_vector), 2);
-	double c = v3d_dot(oc, oc) - sub_c - (radius * radius);
+	double c = v3d_dot(oc, oc) - sub_c - (cy->radius * cy->radius);
 
 	double discrim = (b * b) - (a * c);
 	if (discrim < 0)
@@ -65,8 +64,8 @@ int cylinder(t_ray r, double t_max, t_hit_record *rec, t_cylinder *cy)
 
 	if (t1 > t2)
 		t = t2;
-	double dot;
-	if (t >= MIN && t <= t_max && hit_body(r, t, cy, &dot) != F)
+	// double dot;
+	if (t > MIN && t <= t_max)// && hit_body(r, t, cy, &dot) != F)
 		return (set_rec(rec, t, cy->color));
 	return (F);
 	// return (hit_cap(cy, r, t_min, dot, rec));
