@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cylinder.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pmikada <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/27 14:24:10 by pmikada           #+#    #+#             */
+/*   Updated: 2023/08/27 14:24:11 by pmikada          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 static void	find_top_bottom(t_v3d *tb, t_cylinder *cy)
@@ -9,27 +21,39 @@ static void	find_top_bottom(t_v3d *tb, t_cylinder *cy)
 	tb[1] = v3d_opr_minus(cy->coordinates_center, half_h);
 }
 
+static t_v3d	find_t_dot(double dot, t_cylinder *cy, t_v3d tb[])
+{
+	if (dot >= cy->height / 2)
+		return (tb[0]);
+	return (tb[1]);
+}
+
 int	hit_cap(t_cylinder *cy, t_ray r, double dot, t_hit_record *rec)
 {
 	double	denom;
 	double	t;
 	t_v3d	tb[2];
 	t_v3d	v;
-	
+	t_v3d	t_dot;
+
 	denom = v3d_dot(cy->normalized_vector, r.dir);
 	find_top_bottom(tb, cy);
 	if (fabs(denom) >= MIN)
 	{
 		if (dot >= cy->height / 2)
-			t = v3d_dot(v3d_opr_minus(tb[0], r.orig), cy->normalized_vector) / denom;
+			t = v3d_dot(v3d_opr_minus(tb[0], r.orig), \
+				cy->normalized_vector) / denom;
 		else if (dot < (cy->height * -1) / 2)
-			t = v3d_dot(v3d_opr_minus(tb[1], r.orig), cy->normalized_vector) / denom;
+			t = v3d_dot(v3d_opr_minus(tb[1], r.orig), \
+				cy->normalized_vector) / denom;
 		if (t > MIN)
 		{
-			if (dot >= cy->height / 2)
-				v = v3d_opr_minus(ray_at(r, t), tb[0]);
-			else
-				v = v3d_opr_minus(ray_at(r, t), tb[1]);
+			// if (dot >= cy->height / 2)
+			// 	v = v3d_opr_minus(ray_at(r, t), tb[0]);
+			// else
+			// 	v = v3d_opr_minus(ray_at(r, t), tb[1]);
+			t_dot = find_t_dot(dot, cy, tb);
+			v = v3d_opr_minus(ray_at(r, t), t_dot); 
 			if (sqrtf(v3d_dot(v, v)) <= cy->radius)
 				return (set_rec(rec, t, cy->color));
 		}
@@ -59,9 +83,12 @@ int	cylinder(t_ray r, double t_max, t_hit_record *rec, t_cylinder *cy)
 	double	dot;
 
 	oc = v3d_opr_minus(r.orig, cy->coordinates_center);
-	data[0] = v3d_dot(r.dir, r.dir) - pow(v3d_dot(r.dir, cy->normalized_vector), 2);
-	data[1] = (v3d_dot(r.dir, oc) - v3d_dot(r.dir, cy->normalized_vector) * v3d_dot(oc, cy->normalized_vector));
-	data[2] = v3d_dot(oc, oc) - pow(v3d_dot(oc, cy->normalized_vector), 2) - (cy->radius * cy->radius);
+	data[0] = v3d_dot(r.dir, r.dir) - \
+		pow(v3d_dot(r.dir, cy->normalized_vector), 2);
+	data[1] = (v3d_dot(r.dir, oc) - v3d_dot(r.dir, cy->normalized_vector) \
+		* v3d_dot(oc, cy->normalized_vector));
+	data[2] = v3d_dot(oc, oc) - pow(v3d_dot(oc, cy->normalized_vector), 2) \
+		- (cy->radius * cy->radius);
 	discrim = (data[1] * data[1]) - (data[0] * data[2]);
 	if (discrim < 0)
 		return (F);
