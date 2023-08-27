@@ -48,10 +48,6 @@ int	hit_cap(t_cylinder *cy, t_ray r, double dot, t_hit_record *rec)
 				cy->normalized_vector) / denom;
 		if (t > MIN)
 		{
-			// if (dot >= cy->height / 2)
-			// 	v = v3d_opr_minus(ray_at(r, t), tb[0]);
-			// else
-			// 	v = v3d_opr_minus(ray_at(r, t), tb[1]);
 			t_dot = find_t_dot(dot, cy, tb);
 			v = v3d_opr_minus(ray_at(r, t), t_dot); 
 			if (sqrtf(v3d_dot(v, v)) <= cy->radius)
