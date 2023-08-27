@@ -22,10 +22,8 @@ int	plane(t_ray r, double t_max, t_hit_record *rec, t_plane *pl)
 	{
 		t = v3d_dot(v3d_opr_minus(pl->coordinates_point, r.orig), \
 			pl->normalized_vector) / denom;
-		if (t < 0.0)
-			return (F);
+		if (t > 0.0 && t > MIN && t < t_max)
+			return (set_rec(rec, t, pl->color));
 	}
-	if (t <= MIN || t >= t_max)
-		return (F);
-	return (set_rec(rec, t, pl->color));
+	return (F);
 }

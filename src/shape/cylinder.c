@@ -64,9 +64,8 @@ int cylinder(t_ray r, double t_max, t_hit_record *rec, t_cylinder *cy)
 
 	if (t1 > t2)
 		t = t2;
-	// double dot;
-	if (t > MIN && t <= t_max)// && hit_body(r, t, cy, &dot) != F)
+	double dot;
+	if (t >= MIN && t <= t_max && hit_body(r, t, cy, &dot) != F)
 		return (set_rec(rec, t, cy->color));
-	return (F);
-	// return (hit_cap(cy, r, t_min, dot, rec));
+	return (hit_cap(cy, r, MIN, dot, rec));
 }
