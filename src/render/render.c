@@ -20,7 +20,7 @@ t_rgb ray_color(t_ray r, t_info *world)
 	return (rgb_create(0, 0, 0));
 }
 
-void render(t_mlx *mlx, t_info *info)
+void render(t_mlx *mlx)
 {
 
 	// Image size
@@ -28,8 +28,9 @@ void render(t_mlx *mlx, t_info *info)
 	int width = HORIZON;
 	int height = width / ratio;
 
+	t_camera	*cam = mlx->info->camera;
 	// Camera
-	t_ca camera = create_camera(v3d_create(info->camera->coordinates_point.x, info->camera->coordinates_point.y, info->camera->coordinates_point.z), v3d_create(0.0, 0, -1.0), v3d_create(info->camera->normalized_vector.x, info->camera->normalized_vector.y, info->camera->normalized_vector.z), info->camera->fov, ratio);
+	t_ca camera = create_camera(cam->coordinates_point, cam->normalized_vector, v3d_create(0, 1, 0), cam->fov, ratio);
 
 	for (int j = height - 1; j >= 0; --j)
 	{
@@ -39,7 +40,7 @@ void render(t_mlx *mlx, t_info *info)
 			double v = (double)j / (height - 1);
 
 			t_ray r = get_ray(u, v, camera);
-			t_rgb rgb = ray_color(r, info);
+			t_rgb rgb = ray_color(r, mlx->info);
 
 			// if (height - j != height)
 			ft_mlx_pixel_put(mlx, i, height - j, ft_color(rgb));

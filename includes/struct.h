@@ -80,6 +80,7 @@ typedef struct s_mlx
 	int bits;
 	int line;
 	int endian;
+	t_info	*info;
 } t_mlx;
 
 #endif
