@@ -1,27 +1,44 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pmikada <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/27 03:39:08 by pmikada           #+#    #+#             */
+/*   Updated: 2023/08/27 03:39:10 by pmikada          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
-t_rgb rgb_create(double r, double g, double b)
+static t_rgb	rgb_create(double r, double g, double b)
 {
-	t_rgb rgb;
+	t_rgb	rgb;
 
 	rgb.r = r;
 	rgb.g = g;
 	rgb.b = b;
-
 	return (rgb);
 }
 
-t_rgb ray_color(t_ray r, t_info *world)
+static t_rgb	ray_color(t_ray r, t_info *world)
 {
-	t_hit_record rec;
+	t_hit_record	rec;
 
-	if (hittable_list(r, 0.0, INFINITY, &rec, world))
+	if (hittable_list(r, INFINITY, &rec, world))
 		return (rec.color);
 	return (rgb_create(0, 0, 0));
 }
 
 void render(t_mlx *mlx)
 {
+	double ratio;
+	int width;
+	int height;
+	t_ca camera;
+	int loop[2];
+	double view[2];
 
 	// Image size
 	double ratio = 16.0 / 9.0;
@@ -34,7 +51,8 @@ void render(t_mlx *mlx)
 
 	for (int j = height - 1; j >= 0; --j)
 	{
-		for (int i = 0; i < width; ++i)
+		loop[1] = 0;
+		while (loop[1]++ < width)
 		{
 			double u = (double)i / (width - 1);
 			double v = (double)j / (height - 1);

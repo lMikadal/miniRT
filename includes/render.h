@@ -1,7 +1,18 @@
-#ifndef RENDER_H
-#define RENDER_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pmikada <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/27 03:28:59 by pmikada           #+#    #+#             */
+/*   Updated: 2023/08/27 03:29:00 by pmikada          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-t_rgb rgb_create(double r, double g, double b);
-void render(t_mlx *mlx);
+#ifndef RENDER_H
+# define RENDER_H
+
+void	render(t_mlx *mlx);
 
 #endif

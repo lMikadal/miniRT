@@ -42,7 +42,7 @@ void ft_print_data(t_info *info)
 		{
 			printf("sphere\n");
 			printf("center: %lf %lf %lf\n", tmp->sphere->coordinates_center.x, tmp->sphere->coordinates_center.y, tmp->sphere->coordinates_center.z);
-			printf("diameter: %lf\n", tmp->sphere->diameter);
+			printf("radius: %lf\n", tmp->sphere->radius);
 			printf("color: %d, %d, %d\n", tmp->sphere->color.r, tmp->sphere->color.g, tmp->sphere->color.b);
 		}
 		else if (tmp->type == CY)
@@ -50,7 +50,7 @@ void ft_print_data(t_info *info)
 			printf("cylinder\n");
 			printf("point: %lf %lf %lf\n", tmp->cylinder->coordinates_center.x, tmp->cylinder->coordinates_center.y, tmp->cylinder->coordinates_center.z);
 			printf("vector: %lf %lf %lf\n", tmp->cylinder->normalized_vector.x, tmp->cylinder->normalized_vector.y, tmp->cylinder->normalized_vector.z);
-			printf("diameter: %lf\n", tmp->cylinder->diameter);
+			printf("radius: %lf\n", tmp->cylinder->radius);
 			printf("height: %lf\n", tmp->cylinder->height);
 			printf("color: %d, %d, %d\n", tmp->cylinder->color.r, tmp->cylinder->color.g, tmp->cylinder->color.b);
 		}

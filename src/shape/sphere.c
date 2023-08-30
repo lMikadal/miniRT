@@ -1,32 +1,39 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sphere.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pmikada <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/27 03:13:46 by pmikada           #+#    #+#             */
+/*   Updated: 2023/08/27 03:13:48 by pmikada          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
-int sphere(t_ray r, double t_min, double t_max, t_hit_record *rec, t_sphere *sp)
+int	sphere(t_ray r, double t_max, t_hit_record *rec, t_sphere *sp)
 {
-	t_v3d center = sp->coordinates_center;
-	double radius = sp->diameter / 2;
+	t_v3d	oc;
+	double	ob[3];
+	double	dis;
+	double	sqrtd;
+	double	t;
 
-	t_v3d oc = v3d_opr_minus(r.orig, center);
-	double a = v3d_dot(r.dir, r.dir);
-	double b = 2.0 * v3d_dot(oc, r.dir);
-	double c = v3d_dot(oc, oc) - (radius * radius);
-
-	double discriminant = (b * b) - (4 * a * c);
-	if (discriminant < 0)
+	oc = v3d_opr_minus(r.orig, sp->coordinates_center);
+	ob[0] = v3d_dot(r.dir, r.dir);
+	ob[1] = 2.0 * v3d_dot(oc, r.dir);
+	ob[2] = v3d_dot(oc, oc) - (sp->radius * sp->radius);
+	dis = (ob[1] * ob[1]) - (4 * ob[0] * ob[2]);
+	if (dis < 0)
 		return (F);
-
-	double sqrtd = sqrt(discriminant);
-	double root = ((b * -1) - sqrtd) / (2.0 * a);
-	if (root < t_min || t_max <= root)
+	sqrtd = sqrt(dis);
+	t = ((ob[1] * -1) - sqrtd) / (2.0 * ob[0]);
+	if (t < MIN || t_max <= t)
 	{
-		root = ((b * -1) + sqrtd) / (2.0 * a);
-		if (root < t_min || t_max <= root)
+		t = ((ob[1] * -1) + sqrtd) / (2.0 * ob[0]);
+		if (t < MIN || t_max <= t)
 			return (F);
 	}
-	rec->t = root;
-	// rec->p = ray_at(r, rec->t);
-	rec->color = rgb_create(sp->color.r, sp->color.g, sp->color.b);
-	// t_v3d outward_normal = v3d_div_double(v3d_opr_minus(rec->p, center), radius);
-	// set_facae_normal(r, outward_normal, rec);
-
-	return (T);
+	return (set_rec(rec, t, sp->color));
 }

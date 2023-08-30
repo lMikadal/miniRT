@@ -1,39 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   vec3_3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmikada <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/27 03:31:57 by pmikada           #+#    #+#             */
-/*   Updated: 2023/08/27 03:31:59 by pmikada          ###   ########.fr       */
+/*   Created: 2023/08/27 03:50:30 by pmikada           #+#    #+#             */
+/*   Updated: 2023/08/27 03:50:31 by pmikada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static void	ft_init_info(t_info *info)
+double	v3d_dot(t_v3d a, t_v3d b)
 {
-	info->ambient = NULL;
-	info->camera = NULL;
-	info->light = NULL;
-	info->hittable_list = NULL;
-	info->count_ambient = 1;
-	info->count_camera = 1;
-	info->count_light = 1;
+	return ((a.x * b.x) + (a.y * b.y) + (a.z * b.z));
 }
 
-int	main(int ac, char **av)
+t_v3d	v3d_cross(t_v3d a, t_v3d b)
 {
-	t_info	info;
+	t_v3d	v;
 
-	if (ac == 2)
-	{
-		ft_init_info(&info);
-		ft_parser(&info, av[1]);
-		ft_write_map(av[1], &info);
-	}
-	else
-		printf("Error argument\n");
-	return (0);
+	v.x = (a.y * b.z) - (a.z * b.y);
+	v.y = (a.z * b.x) - (a.x * b.z);
+	v.z = (a.x * b.y) - (a.y * b.x);
+	return (v);
+}
+
+t_v3d	v3d_unit_vec(t_v3d a)
+{
+	t_v3d	v;
+	double	len;
+
+	len = v3d_length(a);
+	v.x = a.x / len;
+	v.y = a.y / len;
+	v.z = a.z / len;
+	return (v);
 }
