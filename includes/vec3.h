@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 14:28:59 by pruangde          #+#    #+#             */
-/*   Updated: 2023/07/02 13:40:29 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/09/03 08:34:07 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,7 @@ t_v3d	v3d_div_double(t_v3d a, double b);
 double	v3d_dot(t_v3d a, t_v3d b);
 t_v3d	v3d_cross(t_v3d a, t_v3d b);
 t_v3d	v3d_unit_vec(t_v3d a);
+int		v3d_cmp(t_v3d a, t_v3d b);
+void	v3d_copy2(t_v3d a, t_v3d *b);
 
 #endif

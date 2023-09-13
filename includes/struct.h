@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmikada <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 03:28:23 by pmikada           #+#    #+#             */
-/*   Updated: 2023/08/27 03:28:25 by pmikada          ###   ########.fr       */
+/*   Updated: 2023/09/13 06:54:32 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,18 +81,31 @@ typedef struct s_info
 	int				count_ambient;
 	int				count_camera;
 	int				count_light;
+	t_rgb			product_amb;
 }	t_info;
+
+typedef struct s_ptr2obj
+{
+	int				count;
+	t_ambient		*ambient;
+	t_camera		*camera;
+	t_light			*light;
+	t_hittable_list	*hitlist;
+	t_v3d			prev_cam;
+}	t_ptr2obj;
 
 typedef struct s_mlx
 {
-	void	*mlx;
-	void	*mlx_win;
-	void	*img;
-	char	*addr;
-	int		bits;
-	int		line;
-	int		endian;
-	t_info	*info;
+	void		*mlx;
+	void		*mlx_win;
+	void		*img;
+	char		*addr;
+	int			bits;
+	int			line;
+	int			endian;
+	t_info		*info;
+	t_ptr2obj	*ptr2obj;
 }	t_mlx;
+
 
 #endif

@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmikada <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: pruangde <pruangde@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 03:29:17 by pmikada           #+#    #+#             */
-/*   Updated: 2023/08/27 03:29:19 by pmikada          ###   ########.fr       */
+/*   Updated: 2023/09/01 09:29:18 by pruangde         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef MINIRT_H
 # define MINIRT_H
@@ -28,13 +28,15 @@
 # include "render.h"
 # include "mlx.h"
 # include "mlx_int.h"
+# include "key_linux.h"
+# include "key_input.h"
 
 # define T 1
 # define F 0
 # define MIN 0.0
 # define HORIZON 400
 # define VERTICAL 225
-# define ESC 53
+// # define ESC 53
 # define PI 3.141592653589793
 # define SP 1
 # define PL 2
@@ -42,6 +44,7 @@
 
 void	ft_mlx_pixel_put(t_mlx *ptr, int x, int y, int color);
 void	ft_write_map(char *name, t_info *info);
+void	to_re_render(t_mlx *mlx);
 void	ft_print_data(t_info *info);
 
 #endif

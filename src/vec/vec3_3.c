@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vec3_3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmikada <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 03:50:30 by pmikada           #+#    #+#             */
-/*   Updated: 2023/08/27 03:50:31 by pmikada          ###   ########.fr       */
+/*   Updated: 2023/09/03 08:35:30 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,20 @@ t_v3d	v3d_unit_vec(t_v3d a)
 	v.y = a.y / len;
 	v.z = a.z / len;
 	return (v);
+}
+
+// same return 1
+int	v3d_cmp(t_v3d a, t_v3d b)
+{
+	if (a.x == b.x && a.y == b.y && a.z == b.z)
+		return (1);
+	return (0);
+}
+
+// copy a to b
+void	v3d_copy2(t_v3d a, t_v3d *b)
+{
+	b->x = a.x;
+	b->y = a.y;
+	b->z = a.z;
 }

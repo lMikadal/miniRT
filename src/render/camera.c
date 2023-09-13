@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmikada <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: pruangde <pruangde@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 03:38:56 by pmikada           #+#    #+#             */
-/*   Updated: 2023/08/27 03:39:00 by pmikada          ###   ########.fr       */
+/*   Updated: 2023/09/01 09:42:22 by pruangde         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "minirt.h"
 
@@ -32,6 +32,7 @@ t_ca create_camera(t_v3d lookfrom, t_v3d lookat, t_v3d vup, double fov, double a
 	t_v3d u;
 	t_v3d v;
 
+	lookat = v3d_opr_plus(lookfrom, lookat);
 	view[0] = 2.0 * tan((fov * PI / 180.0) / 2);
 	view[1] = view[0] / aspect_ratio;
 	w = v3d_unit_vec(v3d_opr_minus(lookfrom, lookat));

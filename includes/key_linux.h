@@ -19,6 +19,15 @@
 # define KEY_A			97
 # define KEY_S			115
 # define KEY_D			100
+# define KEY_Q			113
+# define KEY_E			101
+# define KEY_L_BRAC		91
+# define KEY_R_BRAC		93
+# define KEY_Z			122
+# define KEY_X			120
+# define KEY_C			99
+# define KEY_V			118
+# define KEY_N			110
 
 # define KEY_ARR_UP		65362
 # define KEY_ARR_LEFT	65361
