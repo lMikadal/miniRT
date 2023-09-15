@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 03:28:23 by pmikada           #+#    #+#             */
-/*   Updated: 2023/09/13 06:54:32 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/09/14 12:08:13 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct s_info
 	int				count_camera;
 	int				count_light;
 	t_rgb			product_amb;
+	t_rgb			product_light;
 }	t_info;
 
 typedef struct s_ptr2obj

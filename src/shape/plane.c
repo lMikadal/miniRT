@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmikada <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 03:06:15 by pmikada           #+#    #+#             */
-/*   Updated: 2023/08/27 03:06:17 by pmikada          ###   ########.fr       */
+/*   Updated: 2023/09/15 20:14:18 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@ int	plane(t_ray r, double t_max, t_hit_record *rec, t_plane *pl)
 		t = v3d_dot(v3d_opr_minus(pl->coordinates_point, r.orig), \
 			pl->normalized_vector) / denom;
 		if (t > MIN && t < t_max)
+		{
+			rec->type = PL;
+			// rec->p = 
 			return (set_rec(rec, t, pl->color));
+		}
 	}
 	return (F);
 }

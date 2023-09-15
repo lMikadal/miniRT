@@ -1,6 +1,6 @@
 CC			= cc
 RM			= rm -r
-CFLAGS		= -g -Wall -Wextra -Werror
+CFLAGS		= -g #-Wall -Wextra -Werror
 LFLAGS		= -L/minilibx-linux -lXext -lX11 -lm
 
 NAME		= miniRT

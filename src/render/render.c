@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 03:39:08 by pmikada           #+#    #+#             */
-/*   Updated: 2023/09/13 09:35:43 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/09/15 20:07:34 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ int	hitrec_cmp(t_hit_record a, t_hit_record b)
 {
 	if (a.type != b.type)
 		return (0);
-	if (a.p.x != b.p.x || a.p.y != b.p.y || a.p.z != b.p.z)
-		return (0);
+	// if (a.p.x != b.p.x || a.p.y != b.p.y || a.p.z != b.p.z)
+	// 	return (0);
 	
 	return (1);
 }
@@ -78,7 +78,7 @@ static t_rgb	ray_color(t_ray r, t_info *world)
 
 	t_rgb	color = rgb_create(0, 0, 0);
 	
-	// camera hit object
+	// camera hit object old origin code
 	// if (hittable_list(r, INFINITY, &rec, world))
 	// 	return (rec.color);
 	
@@ -86,10 +86,11 @@ static t_rgb	ray_color(t_ray r, t_info *world)
 	// new code
 	if (hittable_list(r, INFINITY, &rec, world))
 	{
-		lightray = ray_create(world->camera->coordinates_point, rec.p);
+		t_v3d	dirtmp = v3d_opr_minus(rec.p, world->light->coordinates_point);
+		lightray = ray_create(world->light->coordinates_point, dirtmp);
 		if (hittable_list(lightray, INFINITY, &tmp, world))
 		{
-			if(hitrec_cmp(rec, tmp))
+			if (hitrec_cmp(rec, tmp))
 			{
 				//to color;
 				// position camera hit object
@@ -99,19 +100,23 @@ static t_rgb	ray_color(t_ray r, t_info *world)
 				// find ratio of light
 
 				// for test
+				// dprintf(1, "test no light\n");
 				return (rgb_plus(world->product_amb, rec.color));
 				// this will return color of object plus ambient plus light ratio
 
 			}
-			// this is shadow
-			return (world->product_amb);
 		}
+		// this is shadow
+		return (world->product_amb);
+
+		// dprintf(1, "type = %d\n", rec.type);	
+		// dprintf(1, "rec normal = %f %f %f\n", rec.normal.x, rec.normal.y, rec.normal.z);
+		return (rgb_plus(world->product_amb, rec.color));
 		// find shadow and light
 		// if from obj point hit other obj before reach light source
 		//	return (world->product_amb);
 		// else
 		// find degree of light and reflect angle to find ratio of light
-
 
 		// final product
 		color = rgb_plus(world->product_amb, rec.color);
@@ -123,6 +128,7 @@ static t_rgb	ray_color(t_ray r, t_info *world)
 void	init_more_info(t_info *info)
 {
 	info->product_amb = rgb_ratio(info->ambient->color, info->ambient->ratio);
+	info->product_light = rgb_ratio(info->light->color, info->light->ratio);
 }
 
 void render(t_mlx *mlx)
@@ -139,6 +145,8 @@ void render(t_mlx *mlx)
 	width = HORIZON;
 	height = width / ratio;
 	
+	dprintf(1, "width = %d\n", width);
+	dprintf(1, "height = %d\n", height);
 	// init ambient
 	init_more_info(mlx->info);
 	// Camera
@@ -156,5 +164,4 @@ void render(t_mlx *mlx)
 			ft_mlx_pixel_put(mlx, loop[1], height - loop[0], ft_color(ray_color(get_ray(view[0], view[1], camera), mlx->info)));
 		}
 	}
-
 }

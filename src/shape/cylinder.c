@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmikada <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 14:24:10 by pmikada           #+#    #+#             */
-/*   Updated: 2023/08/27 14:24:11 by pmikada          ###   ########.fr       */
+/*   Updated: 2023/09/14 16:31:46 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ int	hit_cap(t_cylinder *cy, t_ray r, double *dot, t_hit_record *rec)
 			t_dot = find_t_dot(dot[0], cy, tb);
 			v = v3d_opr_minus(ray_at(r, t), t_dot); 
 			if (sqrtf(v3d_dot(v, v)) <= cy->radius)
+			{
+				rec->type = CY;
 				return (set_rec(rec, t, cy->color));
+			}
 		}
 	}
 	return (F);
@@ -94,7 +97,10 @@ int	cylinder(t_ray r, double t_max, t_hit_record *rec, t_cylinder *cy)
 	if (t[1] > t[2])
 		t[0] = t[2];
 	if (t[0] >= MIN && t[0] <= t_max && hit_body(r, t[0], cy, &dot[0]) != F)
+	{
+		rec->type = CY;
 		return (set_rec(rec, t[0], cy->color));
+	}
 	dot[1] = t_max;
 	return (hit_cap(cy, r, dot, rec));
 }
