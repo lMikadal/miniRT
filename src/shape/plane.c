@@ -25,7 +25,10 @@ int	plane(t_ray r, double t_max, t_hit_record *rec, t_plane *pl)
 		if (t > MIN && t < t_max)
 		{
 			rec->type = PL;
-			// rec->p = 
+			rec->p = ray_at(r, t);
+			rec->normal = pl->normalized_vector;
+			if (denom > 0)
+				rec->normal = v3d_mult_double(rec->normal, -1);
 			return (set_rec(rec, t, pl->color));
 		}
 	}

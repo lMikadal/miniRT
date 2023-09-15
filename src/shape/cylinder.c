@@ -53,6 +53,10 @@ int	hit_cap(t_cylinder *cy, t_ray r, double *dot, t_hit_record *rec)
 			if (sqrtf(v3d_dot(v, v)) <= cy->radius)
 			{
 				rec->type = CY;
+				rec->p = ray_at(r, t);
+				rec->normal = cy->normalized_vector;
+				if (denom > 0)
+					rec->normal = v3d_mult_double(rec->normal, -1);
 				return (set_rec(rec, t, cy->color));
 			}
 		}
@@ -99,6 +103,8 @@ int	cylinder(t_ray r, double t_max, t_hit_record *rec, t_cylinder *cy)
 	if (t[0] >= MIN && t[0] <= t_max && hit_body(r, t[0], cy, &dot[0]) != F)
 	{
 		rec->type = CY;
+		rec->p = ray_at(r, t[0]);
+		rec->normal = v3d_opr_minus(ray_at(r, t[0]), ray_at(r, dot[0]));
 		return (set_rec(rec, t[0], cy->color));
 	}
 	dot[1] = t_max;

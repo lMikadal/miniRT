@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-static void	cx_rgb_limit(t_rgb *a)
+static void cx_rgb_limit(t_rgb *a)
 {
 	if (a->r > 255)
 		a->r = 255;
@@ -28,9 +28,9 @@ static void	cx_rgb_limit(t_rgb *a)
 		a->b = 0;
 }
 
-t_rgb	rgb_plus(t_rgb a, t_rgb b)
+t_rgb rgb_plus(t_rgb a, t_rgb b)
 {
-	t_rgb	rgb;
+	t_rgb rgb;
 
 	rgb.r = a.r + b.r;
 	rgb.g = a.g + b.g;
@@ -39,9 +39,9 @@ t_rgb	rgb_plus(t_rgb a, t_rgb b)
 	return (rgb);
 }
 
-t_rgb	rgb_create(double r, double g, double b)
+t_rgb rgb_create(double r, double g, double b)
 {
-	t_rgb	rgb;
+	t_rgb rgb;
 
 	rgb.r = r;
 	rgb.g = g;
@@ -49,9 +49,9 @@ t_rgb	rgb_create(double r, double g, double b)
 	return (rgb);
 }
 
-t_rgb	rgb_ratio(t_rgb a, double ratio)
+t_rgb rgb_ratio(t_rgb a, double ratio)
 {
-	t_rgb	rgb;
+	t_rgb rgb;
 
 	rgb.r = a.r * ratio;
 	rgb.g = a.g * ratio;
@@ -59,57 +59,55 @@ t_rgb	rgb_ratio(t_rgb a, double ratio)
 	return (rgb);
 }
 
-int	hitrec_cmp(t_hit_record a, t_hit_record b)
+int hitrec_cmp(t_hit_record a, t_hit_record b)
 {
 	if (a.type != b.type)
 		return (0);
 	// if (a.p.x != b.p.x || a.p.y != b.p.y || a.p.z != b.p.z)
 	// 	return (0);
-	
+
 	return (1);
 }
 
-static t_rgb	ray_color(t_ray r, t_info *world)
+static t_rgb ray_color(t_ray r, t_info *world)
 {
-	t_hit_record	rec;
+	t_hit_record rec;
 
-	t_hit_record	tmp;
-	t_ray			lightray;
+	t_hit_record tmp;
+	t_ray lightray;
 
-	t_rgb	color = rgb_create(0, 0, 0);
-	
+	t_rgb color = rgb_create(0, 0, 0);
+
 	// camera hit object old origin code
 	// if (hittable_list(r, INFINITY, &rec, world))
 	// 	return (rec.color);
-	
 
 	// new code
 	if (hittable_list(r, INFINITY, &rec, world))
 	{
-		t_v3d	dirtmp = v3d_opr_minus(rec.p, world->light->coordinates_point);
+		t_v3d dirtmp = v3d_opr_minus(rec.p, world->light->coordinates_point);
 		lightray = ray_create(world->light->coordinates_point, dirtmp);
-		if (hittable_list(lightray, INFINITY, &tmp, world))
+		if (hittable_list(lightray, rec.t, &tmp, world))
 		{
-			if (hitrec_cmp(rec, tmp))
-			{
-				//to color;
-				// position camera hit object
-				// line from cam to pos hit obj
-				// line that light will reflect from pos hit obj
-				// find angle of light and reflect
-				// find ratio of light
+			// if (hitrec_cmp(rec, tmp))
+			// {
+			// to color;
+			//  position camera hit object
+			//  line from cam to pos hit obj
+			//  line that light will reflect from pos hit obj
+			//  find angle of light and reflect
+			//  find ratio of light
 
-				// for test
-				// dprintf(1, "test no light\n");
-				return (rgb_plus(world->product_amb, rec.color));
-				// this will return color of object plus ambient plus light ratio
-
-			}
+			// for test
+			// dprintf(1, "test no light\n");
+			return (rgb_plus(world->product_amb, rec.color));
+			// this will return color of object plus ambient plus light ratio
+			// }
 		}
 		// this is shadow
 		return (world->product_amb);
 
-		// dprintf(1, "type = %d\n", rec.type);	
+		// dprintf(1, "type = %d\n", rec.type);
 		// dprintf(1, "rec normal = %f %f %f\n", rec.normal.x, rec.normal.y, rec.normal.z);
 		return (rgb_plus(world->product_amb, rec.color));
 		// find shadow and light
@@ -125,7 +123,7 @@ static t_rgb	ray_color(t_ray r, t_info *world)
 	return (color);
 }
 
-void	init_more_info(t_info *info)
+void init_more_info(t_info *info)
 {
 	info->product_amb = rgb_ratio(info->ambient->color, info->ambient->ratio);
 	info->product_light = rgb_ratio(info->light->color, info->light->ratio);
@@ -139,12 +137,12 @@ void render(t_mlx *mlx)
 	t_ca camera;
 	int loop[2];
 	double view[2];
-	t_camera	*cam;
+	t_camera *cam;
 
 	ratio = 16.0 / 9.0;
 	width = HORIZON;
 	height = width / ratio;
-	
+
 	dprintf(1, "width = %d\n", width);
 	dprintf(1, "height = %d\n", height);
 	// init ambient
@@ -152,7 +150,7 @@ void render(t_mlx *mlx)
 	// Camera
 	cam = mlx->info->camera;
 	camera = create_camera(cam->coordinates_point, cam->normalized_vector, v3d_create(0, 1, 0), cam->fov, ratio);
-	
+
 	loop[0] = height - 1;
 	while (loop[0]-- >= 0)
 	{
