@@ -85,9 +85,9 @@ static t_rgb ray_color(t_ray r, t_info *world)
 	// new code
 	if (hittable_list(r, INFINITY, &rec, world))
 	{
-		t_v3d dirtmp = v3d_opr_minus(rec.p, world->light->coordinates_point);
-		lightray = ray_create(world->light->coordinates_point, dirtmp);
-		if (hittable_list(lightray, rec.t, &tmp, world))
+		// t_v3d dirtmp = v3d_opr_minus(rec.p, world->light->coordinates_point);
+		lightray = ray_create(rec.p, world->light->coordinates_point);
+		if (!hittable_list(lightray, INFINITY, &tmp, world))
 		{
 			// if (hitrec_cmp(rec, tmp))
 			// {
