@@ -17,20 +17,30 @@ static void	ft_insert_data(t_info *info, char **data)
 	int	len;
 
 	len = ft_strlen(data[0]);
-	if (len == 1 && ft_strcmp(data[0], "A") == F)
+	if (len == 1 && !ft_strcmp(data[0], "A"))
 		ft_set_ambient(info, data);
-	else if (len == 1 && ft_strcmp(data[0], "C") == F)
+	else if (len == 1 && !ft_strcmp(data[0], "C"))
 		ft_set_camera(info, data);
-	else if (len == 1 && ft_strcmp(data[0], "L") == F)
+	else if (len == 1 && !ft_strcmp(data[0], "L"))
 		ft_set_light(info, data);
-	else if (len == 2 && ft_strcmp(data[0], "pl") == F)
+	else if (len == 2 && !ft_strcmp(data[0], "pl"))
 		ft_set_plane(info, data);
-	else if (len == 2 && ft_strcmp(data[0], "sp") == F)
+	else if (len == 2 && !ft_strcmp(data[0], "sp"))
 		ft_set_sphere(info, data);
-	else if (len == 2 && ft_strcmp(data[0], "cy") == F)
+	else if (len == 2 && !ft_strcmp(data[0], "cy"))
 		ft_set_cylinder(info, data);
 	else if (ft_strcmp(data[0], "\n"))
 		ft_error("Error file", info);
+}
+
+static	void	ft_check_info(t_info *info)
+{
+	if (info->count_ambient > 0)
+		ft_error("Error ambient at least one in file .rt", info);
+	if (info->count_camera > 0)
+		ft_error("Error camera at least one in file .rt", info);
+	if (info->count_light > 0)
+		ft_error("Error light at least one in file .rt", info);
 }
 
 void	ft_parser(t_info *info, char *file)
@@ -53,5 +63,6 @@ void	ft_parser(t_info *info, char *file)
 		ft_free_2d(split_data);
 		free(data);
 	}
+	ft_check_info(info);
 	close(open_fd);
 }
