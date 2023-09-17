@@ -53,6 +53,7 @@ void	ft_set_light(t_info *info, char **data)
 	if (info->light == NULL)
 		return ;
 	ft_set_point(&(info->light->coordinates_point), data[1], info);
+	info->light->coordinates_point = v3d_unit_vec(info->light->coordinates_point);
 	info->light->ratio = ft_atod(data[2], info);
 	if (ft_range_double(0.0, 1.0, info->light->ratio) == F)
 		ft_error("Error light", info);
