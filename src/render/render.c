@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 03:39:08 by pmikada           #+#    #+#             */
-/*   Updated: 2023/09/15 20:07:34 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/09/17 03:07:02 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,8 @@ static t_rgb ray_color(t_ray r, t_info *world)
 			// }
 		}
 		// this is shadow
-		return (world->product_amb);
+		rec.color = rgb_ratio(rec.color, 0.05);
+		// return (world->product_amb);
 
 		// dprintf(1, "type = %d\n", rec.type);
 		// dprintf(1, "rec normal = %f %f %f\n", rec.normal.x, rec.normal.y, rec.normal.z);

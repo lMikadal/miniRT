@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 04:02:21 by pruangde          #+#    #+#             */
-/*   Updated: 2023/09/03 09:19:35 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/09/17 04:32:52 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,16 @@ void	select_nextobj(t_mlx *mlx)
 	what_shape(mlx->ptr2obj);
 }
 
+void	to_shape(int key, t_ptr2obj *ptr2obj, int *stat)
+{
+	if (ptr2obj->hitlist->type == SP)
+		*stat = to_sphere(key, ptr2obj->hitlist->sphere);
+	// else if (ptr2obj->hitlist->type == PL)
+	// 	*stat = to_plane(key, ptr2obj->hitlist->plane, stat);
+	// else if (ptr2obj->hitlist->type == CY)
+	// 	*stat = to_cylinder(key, ptr2obj->hitlist->cylinder, stat);
+}
+
 void	to_keyhall(int key, t_mlx *mlx)
 {
 	int	stat;
@@ -86,8 +96,9 @@ void	to_keyhall(int key, t_mlx *mlx)
 	// 	to_light(key, mlx->ptr2obj->light, &stat);
 	// else if (mlx->ptr2obj->count == 3)
 	// 	to_ambient(key, mlx->ptr2obj->ambient, &stat);
-	// else if (mlx->ptr2obj->count == 4)
-	// 	to_shape(key, mlx->ptr2obj->hitlist, &stat);
+	else if (mlx->ptr2obj->count == 4)
+		to_shape(key, mlx->ptr2obj->hitlist, &stat);
+	dprintf(1, "stat = %d\n", stat);
 	if (stat)
 		to_re_render(mlx);
 }
