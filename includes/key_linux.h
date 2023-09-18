@@ -6,14 +6,15 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 17:31:37 by pruangde          #+#    #+#             */
-/*   Updated: 2023/08/25 17:31:42 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/09/17 08:22:25 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KEY_LINUX_H
 # define KEY_LINUX_H
 
-# define KEY_ESC		53
+// # define KEY_ESC		53
+# define KEY_ESC		65307
 
 # define KEY_W			119
 # define KEY_A			97

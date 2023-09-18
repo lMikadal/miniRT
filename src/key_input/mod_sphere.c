@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 03:15:12 by pruangde          #+#    #+#             */
-/*   Updated: 2023/09/17 04:15:12 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/09/17 08:08:05 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ int	to_sphere(int key, t_sphere *sp)
 	if (key == KEY_W)
 		sp->coordinates_center.z += 0.2;
 	else if (key == KEY_A)
-		sp->coordinates_center.x -= 0.2;
+		sp->coordinates_center.x += 0.2;
 	else if (key == KEY_S)
 		sp->coordinates_center.z -= 0.2;
 	else if (key == KEY_D)
-		sp->coordinates_center.x += 0.2;
+		sp->coordinates_center.x -= 0.2;
 	else if (key == KEY_Q)
 		sp->coordinates_center.y += 0.2;
 	else if (key == KEY_E)

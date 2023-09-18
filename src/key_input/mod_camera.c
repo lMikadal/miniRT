@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 08:27:53 by pruangde          #+#    #+#             */
-/*   Updated: 2023/09/03 10:18:03 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/09/17 08:06:26 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,5 @@ void	to_camera(int key, t_ptr2obj *ptr2obj, int *stat)
 	}
 	if (*stat)
 		v3d_copy2(tmp_prev, &ptr2obj->prev_cam);
-	printf("prev = %f, %f, %f ____ 2change = %f, %f, %f\n", ptr2obj->prev_cam.x, ptr2obj->prev_cam.y, ptr2obj->prev_cam.z, ptr2obj->camera->normalized_vector.x, ptr2obj->camera->normalized_vector.y, ptr2obj->camera->normalized_vector.z);
 }
 

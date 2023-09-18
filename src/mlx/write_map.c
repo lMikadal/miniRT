@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 03:33:14 by pmikada           #+#    #+#             */
-/*   Updated: 2023/09/03 02:52:39 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/09/17 08:20:18 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	ft_close(t_mlx *mlx)
 
 int	ft_key_hook(int key, t_mlx *mlx)
 {
+	dprintf(1, "key: %d\n", key);
 	if (key == KEY_ESC)
 		ft_close(mlx);
 	else if (key == KEY_N)

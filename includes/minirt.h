@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 03:29:17 by pmikada           #+#    #+#             */
-/*   Updated: 2023/09/16 17:55:50 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/09/18 07:33:10 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@
 # define T 1
 # define F 0
 # define MIN 0.001
-# define HORIZON 400
-# define VERTICAL 225
+# define HORIZON 800
+# define VERTICAL 450
 // # define ESC 53
 # define PI 3.141592653589793
 # define SP 1

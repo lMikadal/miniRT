@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 04:02:21 by pruangde          #+#    #+#             */
-/*   Updated: 2023/09/17 04:32:52 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/09/17 08:20:24 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,16 +89,14 @@ void	to_keyhall(int key, t_mlx *mlx)
 	int	stat;
 
 	stat = 1;
-	printf("TESTing key == %d\n", key);
 	if (mlx->ptr2obj->count == 1)
 		to_camera(key, mlx->ptr2obj, &stat);
-	// else if (mlx->ptr2obj->count == 2)
-	// 	to_light(key, mlx->ptr2obj->light, &stat);
-	// else if (mlx->ptr2obj->count == 3)
-	// 	to_ambient(key, mlx->ptr2obj->ambient, &stat);
+	else if (mlx->ptr2obj->count == 2)
+		to_light(key, mlx->ptr2obj->light, &stat);
+	else if (mlx->ptr2obj->count == 3)
+		to_ambient(key, mlx->ptr2obj->ambient, &stat);
 	else if (mlx->ptr2obj->count == 4)
-		to_shape(key, mlx->ptr2obj->hitlist, &stat);
-	dprintf(1, "stat = %d\n", stat);
+		to_shape(key, mlx->ptr2obj, &stat);
 	if (stat)
 		to_re_render(mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 03:39:08 by pmikada           #+#    #+#             */
-/*   Updated: 2023/09/17 03:07:02 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/09/18 13:31:49 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,17 @@ t_rgb rgb_plus(t_rgb a, t_rgb b)
 	return (rgb);
 }
 
+t_rgb	rgb_minus(t_rgb a, t_rgb b)
+{
+	t_rgb rgb;
+
+	rgb.r = a.r - b.r;
+	rgb.g = a.g - b.g;
+	rgb.b = a.b - b.b;
+	cx_rgb_limit(&rgb);
+	return (rgb);
+}
+
 t_rgb rgb_create(double r, double g, double b)
 {
 	t_rgb rgb;
@@ -59,15 +70,12 @@ t_rgb rgb_ratio(t_rgb a, double ratio)
 	return (rgb);
 }
 
-int hitrec_cmp(t_hit_record a, t_hit_record b)
-{
-	if (a.type != b.type)
-		return (0);
-	// if (a.p.x != b.p.x || a.p.y != b.p.y || a.p.z != b.p.z)
-	// 	return (0);
 
-	return (1);
-}
+
+
+
+
+
 
 static t_rgb ray_color(t_ray r, t_info *world)
 {
@@ -85,41 +93,43 @@ static t_rgb ray_color(t_ray r, t_info *world)
 	// new code
 	if (hittable_list(r, INFINITY, &rec, world))
 	{
+		color = rgb_plus(world->product_amb, rec.color);
 		// t_v3d dirtmp = v3d_opr_minus(rec.p, world->light->coordinates_point);
-		lightray = ray_create(rec.p, world->light->coordinates_point);
+		lightray.orig = rec.p;
+		lightray.dir = world->light->coordinates_point;
 		if (!hittable_list(lightray, INFINITY, &tmp, world))
 		{
-			// if (hitrec_cmp(rec, tmp))
-			// {
-			// to color;
-			//  position camera hit object
-			//  line from cam to pos hit obj
-			//  line that light will reflect from pos hit obj
-			//  find angle of light and reflect
-			//  find ratio of light
+			// t_v3d	camdir = v3d_opr_minus(world->camera->coordinates_point, rec.p);
+			t_v3d	lgtdir = v3d_opr_minus(world->light->coordinates_point, rec.p);
+			
 
-			// for test
-			// dprintf(1, "test no light\n");
-			return (rgb_plus(world->product_amb, rec.color));
-			// this will return color of object plus ambient plus light ratio
-			// }
+
+			double	two_dot = v3d_dot(rec.normal, lgtdir);
+			double	cam_len = v3d_length(rec.normal);
+			double	lgt_len = v3d_length(lgtdir);
+		
+			double	angle = acos(two_dot / (cam_len * lgt_len));
+
+			angle = 1 - (angle * 2.0 / PI);
+			
+
+			// color = amb + (product light + color) *
+			color = rgb_ratio(color, angle);
+			t_rgb rgb = rgb_ratio(world->product_light, angle * 0.2);
+			color = rgb_plus(color, rgb);
+			if (rec.type == CY)
+				printf("normal = %f %f %f\n", rec.normal.x, rec.normal.y, rec.normal.z);
+
+			// double	angle = v3d_dot(lightray.dir, r.dir);
+			// angle /= (v3d_length(lightray.dir) * v3d_length(r.dir));
+			// double	dot = v3d_dot(camdir, hitlgt);
+			// double angle = acos(dot / (v3d_norm(camdir) * v3d_norm(hitlgt)));
+			return (rgb_plus(color, world->product_amb));
 		}
 		// this is shadow
-		rec.color = rgb_ratio(rec.color, 0.05);
 		// return (world->product_amb);
-
-		// dprintf(1, "type = %d\n", rec.type);
-		// dprintf(1, "rec normal = %f %f %f\n", rec.normal.x, rec.normal.y, rec.normal.z);
-		return (rgb_plus(world->product_amb, rec.color));
-		// find shadow and light
-		// if from obj point hit other obj before reach light source
-		//	return (world->product_amb);
-		// else
-		// find degree of light and reflect angle to find ratio of light
-
 		// final product
-		color = rgb_plus(world->product_amb, rec.color);
-		return (color);
+		return (world->product_amb);
 	}
 	return (color);
 }
@@ -144,8 +154,6 @@ void render(t_mlx *mlx)
 	width = HORIZON;
 	height = width / ratio;
 
-	dprintf(1, "width = %d\n", width);
-	dprintf(1, "height = %d\n", height);
 	// init ambient
 	init_more_info(mlx->info);
 	// Camera

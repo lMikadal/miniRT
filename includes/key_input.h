@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 03:46:46 by pruangde          #+#    #+#             */
-/*   Updated: 2023/09/17 04:15:01 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/09/17 08:25:20 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	select_nextobj(t_mlx *mlx);
 void	what_shape(t_ptr2obj *ptr2obj);
 
 void	to_camera(int key, t_ptr2obj *ptr2obj, int *stat);
-// void	to_light(int key, t_ptr2obj *ptr2obj);
-// void	to_ambient(int key, t_ptr2obj *ptr2obj);
-// void	to_shape(int key, t_ptr2obj *ptr2obj);
+void	to_light(int key, t_light *lgt, int *stat);
+void	to_ambient(int key, t_ambient *amb, int *stat);
+void	to_shape(int key, t_ptr2obj *ptr2obj, int *stat);
 
 // camera
 void	cam_yaw_left(t_camera *cam);
@@ -30,13 +30,9 @@ void	cam_yaw_right(t_camera *cam);
 void	rotatecam_updown(int key, t_ptr2obj *ptr, int *stat);
 int		normal_vec_zx_zero(t_v3d cam);
 
-
-// light
-
-// ambient
-
 // shape
 //	sphere
-void	to_shpere(int key, t_sphere *sp);
+
+
 
 #endif

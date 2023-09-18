@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 03:13:46 by pmikada           #+#    #+#             */
-/*   Updated: 2023/09/17 05:04:29 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/09/17 06:45:47 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	sphere(t_ray r, double t_max, t_hit_record *rec, t_sphere *sp)
 	}
 	rec->type = SP;
 	rec->p = ray_at(r, t);
-	// rec->p = v3d_unit_vec(rec->p);
 	rec->normal = v3d_opr_minus(rec->p, sp->coordinates_center);
 
 	// rec->normal = v3d_div_double(v3d_opr_minus(rec->p, sp->coordinates_center), sp->radius);
