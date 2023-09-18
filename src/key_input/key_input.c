@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 04:02:21 by pruangde          #+#    #+#             */
-/*   Updated: 2023/09/17 08:20:24 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/09/18 15:31:34 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	cx_validkey(int key)
 	else if (key == KEY_ARR_UP || key == KEY_ARR_LEFT)
 		return (1);
 	else if (key == KEY_ARR_DOWN || key == KEY_ARR_RIGHT)
+		return (1);
+	else if (key == KEY_R)
 		return (1);
 	return (0);
 }	

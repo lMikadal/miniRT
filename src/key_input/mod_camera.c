@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 08:27:53 by pruangde          #+#    #+#             */
-/*   Updated: 2023/09/17 08:06:26 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/09/18 15:44:33 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 static void	move_cam_pos(int key, t_camera *cam)
 {
 	if (key == KEY_W)
-		cam->coordinates_point.z += 1.0;
+		cam->coordinates_point.z += 0.2;
 	else if (key == KEY_A)
-		cam->coordinates_point.x -= 1.0;
+		cam->coordinates_point.x -= 0.2;
 	else if (key == KEY_S)
-		cam->coordinates_point.z -= 1.0;
+		cam->coordinates_point.z -= 0.2;
 	else if (key == KEY_D)
-		cam->coordinates_point.x += 1.0;
+		cam->coordinates_point.x += 0.2;
 	else if (key == KEY_Q)
-		cam->coordinates_point.y += 1.0;
+		cam->coordinates_point.y += 0.2;
 	else if (key == KEY_E)
-		cam->coordinates_point.y -= 1.0;
+		cam->coordinates_point.y -= 0.2;
 }
 
 static void	wide_cam(int key, t_camera *cam)
@@ -71,6 +71,8 @@ void	to_camera(int key, t_ptr2obj *ptr2obj, int *stat)
 		rotate_cam(key, ptr2obj, stat);
 	else if (key == KEY_Z || key == KEY_X)
 		wide_cam(key, ptr2obj->camera);
+	else if (key == KEY_R)
+		reset_camera(ptr2obj->camera, stat);
 	else
 	{
 		err_key(2);

@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 17:31:37 by pruangde          #+#    #+#             */
-/*   Updated: 2023/09/17 08:22:25 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/09/18 15:25:16 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 # define KEY_C			99
 # define KEY_V			118
 # define KEY_N			110
+
+# define KEY_R			114
 
 # define KEY_ARR_UP		65362
 # define KEY_ARR_LEFT	65361

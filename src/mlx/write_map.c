@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 03:33:14 by pmikada           #+#    #+#             */
-/*   Updated: 2023/09/17 08:20:18 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/09/18 15:46:15 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,10 @@ void	init_ptr2obj(t_info *info, t_ptr2obj *ptr2obj)
 	printf("Arrows: rotate selected object pitch/yaw\n");
 	printf("[ or ]: rotate selected object roll\n");
 	printf("Z/X   : increase/decrease selected object size\n");
-	printf("C/V   : increase/decrease selected object height\n");
-	printf("N     : select next object\n\n");
+	printf("C/V   : increase/decrease selected object height\n\n");
+	printf("N     : select next object\n");
+	printf("R     : Reset camera norm to 0,0,1 and fov to 90 when selected camera\n");
+	printf("ESC   : exit\n");
 }
 
 void	ft_write_map(char *name, t_info *info)
