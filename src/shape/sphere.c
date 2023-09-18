@@ -42,7 +42,7 @@ int	sphere(t_ray r, double t_max, t_hit_record *rec, t_sphere *sp)
 	}
 	rec->type = SP;
 	rec->p = ray_at(r, t);
-	rec->normal = v3d_opr_minus(rec->p, sp->coordinates_center);
+	rec->normal = v3d_unit_vec(v3d_opr_minus(rec->p, sp->coordinates_center));
 
 	// rec->normal = v3d_div_double(v3d_opr_minus(rec->p, sp->coordinates_center), sp->radius);
 	// if (v3d_dot(r.dir, rec->normal) > 0)

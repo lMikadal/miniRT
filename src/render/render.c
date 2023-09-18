@@ -117,8 +117,8 @@ static t_rgb ray_color(t_ray r, t_info *world)
 			color = rgb_ratio(color, angle);
 			t_rgb rgb = rgb_ratio(world->product_light, angle * 0.2);
 			color = rgb_plus(color, rgb);
-			if (rec.type == CY)
-				printf("normal = %f %f %f\n", rec.normal.x, rec.normal.y, rec.normal.z);
+			// if (rec.type == CY)
+			// 	printf("normal = %f %f %f\n", rec.normal.x, rec.normal.y, rec.normal.z);
 
 			// double	angle = v3d_dot(lightray.dir, r.dir);
 			// angle /= (v3d_length(lightray.dir) * v3d_length(r.dir));

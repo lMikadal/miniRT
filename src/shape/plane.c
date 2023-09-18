@@ -29,6 +29,7 @@ int	plane(t_ray r, double t_max, t_hit_record *rec, t_plane *pl)
 			rec->normal = pl->normalized_vector;
 			if (denom > 0)
 				rec->normal = v3d_mult_double(rec->normal, -1);
+			rec->normal = v3d_unit_vec(rec->normal);
 			return (set_rec(rec, t, pl->color));
 		}
 	}
