@@ -50,7 +50,6 @@ void	init_ptr2obj(t_info *info, t_ptr2obj *ptr2obj)
 	ptr2obj->ambient = info->ambient;
 	ptr2obj->hitlist = info->hittable_list;
 	ptr2obj->prev_cam = v3d_create(0, 0, 0);
-
 	printf("Key Instruction\n\n");
 	printf("WASD  : move selected object\n");
 	printf("Q/E   : move selected object up/down\n");
@@ -59,7 +58,7 @@ void	init_ptr2obj(t_info *info, t_ptr2obj *ptr2obj)
 	printf("Z/X   : increase/decrease selected object size\n");
 	printf("C/V   : increase/decrease selected object height\n\n");
 	printf("N     : select next object\n");
-	printf("R     : Reset camera norm to 0,0,1 and fov to 90 when selected camera\n");
+	printf("R     : Reset camera norm to 0,0,1 and fov to 90\n");
 	printf("ESC   : exit\n");
 }
 
@@ -72,14 +71,11 @@ void	ft_write_map(char *name, t_info *info)
 	mlx.mlx_win = mlx_new_window(mlx.mlx, HORIZON, VERTICAL, name);
 	mlx.img = mlx_new_image(mlx.mlx, HORIZON, VERTICAL);
 	mlx.addr = mlx_get_data_addr(mlx.img, &mlx.bits, &mlx.line, &mlx.endian);
-
 	mlx.info = info;
 	init_ptr2obj(info, &ptr2obj);
 	mlx.ptr2obj = &ptr2obj;
 	what_shape(mlx.ptr2obj);
 	render(&mlx);
-
-	// push image to window
 	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.img, 0, 0);
 	mlx_key_hook(mlx.mlx_win, ft_key_hook, &mlx);
 	mlx_hook(mlx.mlx_win, 17, 0L, ft_close, &mlx);

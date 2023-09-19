@@ -108,5 +108,4 @@ typedef struct s_mlx
 	t_ptr2obj	*ptr2obj;
 }	t_mlx;
 
-
 #endif

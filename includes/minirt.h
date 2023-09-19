@@ -45,6 +45,5 @@
 void	ft_mlx_pixel_put(t_mlx *ptr, int x, int y, int color);
 void	ft_write_map(char *name, t_info *info);
 void	to_re_render(t_mlx *mlx);
-void	ft_print_data(t_info *info);
 
 #endif

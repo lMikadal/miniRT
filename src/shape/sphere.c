@@ -12,11 +12,6 @@
 
 #include "minirt.h"
 
-static t_v3d	reflect(t_v3d v, t_v3d n)
-{
-	return (v3d_opr_minus(v, v3d_mult_double(n, 2 * v3d_dot(v, n))));
-}
-
 int	sphere(t_ray r, double t_max, t_hit_record *rec, t_sphere *sp)
 {
 	t_v3d	oc;
@@ -43,12 +38,5 @@ int	sphere(t_ray r, double t_max, t_hit_record *rec, t_sphere *sp)
 	rec->type = SP;
 	rec->p = ray_at(r, t);
 	rec->normal = v3d_unit_vec(v3d_opr_minus(rec->p, sp->coordinates_center));
-
-	// rec->normal = v3d_div_double(v3d_opr_minus(rec->p, sp->coordinates_center), sp->radius);
-	// if (v3d_dot(r.dir, rec->normal) > 0)
-	// 	rec->normal = v3d_mult_double(rec->normal, -1);
-
-	t_v3d ref = reflect(v3d_unit_vec(r.dir), rec->normal);
-	
 	return (set_rec(rec, t, sp->color));
 }
