@@ -30,4 +30,17 @@ void	ft_free_info(t_info *info)
 		free(info->camera);
 	if (info->light != NULL)
 		free(info->light);
+	if (info->hittable_list != NULL)
+	{
+		while(info->hittable_list->next != NULL)
+		{
+			if (info->hittable_list->type == PL)
+				free(info->hittable_list->plane);
+			else if (info->hittable_list->type == SP)
+				free(info->hittable_list->sphere);
+			else if (info->hittable_list->type == CY)
+				free(info->hittable_list->cylinder);
+			info->hittable_list = info->hittable_list->next;
+		}
+	}
 }

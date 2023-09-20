@@ -16,7 +16,7 @@ void	ft_error(const char *c, t_info *info)
 {
 	printf("%s\n", c);
 	ft_free_info(info);
-	exit(0);
+	exit(1);
 }
 
 void	ft_check_len_data(char **data, int len, t_info *info)
