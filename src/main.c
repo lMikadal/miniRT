@@ -23,11 +23,23 @@ static void	ft_init_info(t_info *info)
 	info->count_light = 1;
 }
 
+static int	ft_cheek_file(char *file)
+{
+	int	len;
+
+	len = ft_strlen(file);
+	if (len < 4)
+		return (0);
+	if (file[len - 1] != 't' || file[len - 2] != 'r' || file[len - 3] != '.')
+		return (0);
+	return (1);
+}
+
 int	main(int ac, char **av)
 {
 	t_info	info;
 
-	if (ac == 2)
+	if (ac == 2 && ft_cheek_file(av[1]))
 	{
 		ft_init_info(&info);
 		ft_parser(&info, av[1]);

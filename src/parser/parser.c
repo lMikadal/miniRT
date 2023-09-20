@@ -41,7 +41,10 @@ void	ft_parser(t_info *info, char *file)
 
 	open_fd = open(file, O_RDONLY);
 	if (open_fd < 0)
+	{
 		printf("Error open file\n");
+		exit(1);
+	}
 	while (1 && open_fd > 0)
 	{
 		data = get_next_line(open_fd);
