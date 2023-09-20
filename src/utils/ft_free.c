@@ -32,7 +32,7 @@ void	ft_free_info(t_info *info)
 		free(info->light);
 	if (info->hittable_list != NULL)
 	{
-		while(info->hittable_list->next != NULL)
+		while (info->hittable_list->next != NULL)
 		{
 			if (info->hittable_list->type == PL)
 				free(info->hittable_list->plane);
