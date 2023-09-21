@@ -6,12 +6,25 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 03:46:46 by pruangde          #+#    #+#             */
-/*   Updated: 2023/09/18 15:44:58 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/09/22 03:00:18 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KEY_INPUT_H
 # define KEY_INPUT_H
+
+typedef struct s_v2d
+{
+	double	x;
+	double	y;
+}			t_v2d;
+
+typedef struct s_r2d
+{
+	t_v2d	origin;
+	t_v2d	direction;
+}			t_r2d;
+
 
 int		cx_validkey(int key);
 void	to_keyhall(int key, t_mlx *mlx);
@@ -35,6 +48,9 @@ void	reset_camera(t_camera *cam, int *stat);
 // shape
 //	sphere
 int		to_sphere(int key, t_sphere *sp);
+
+
+// formula related
 
 
 #endif
