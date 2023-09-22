@@ -6,13 +6,13 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 07:59:14 by pruangde          #+#    #+#             */
-/*   Updated: 2023/09/17 08:19:07 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/09/22 16:26:32 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	to_light(int key, t_light *lgt, int *stat)
+void	to_light(int key, t_light *lgt)
 {
 	if (key == KEY_W)
 		lgt->coordinates_point.z += 0.2;
@@ -41,7 +41,7 @@ void	to_light(int key, t_light *lgt, int *stat)
 		lgt->ratio = 1.0;
 }
 
-void	to_ambient(int key, t_ambient *amb, int *stat)
+void	to_ambient(int key, t_ambient *amb)
 {
 	if (key == KEY_Z)
 		amb->ratio += 0.2;

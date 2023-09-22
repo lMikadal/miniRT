@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 04:02:21 by pruangde          #+#    #+#             */
-/*   Updated: 2023/09/22 13:54:30 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/09/22 16:27:29 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,11 @@ void	to_keyhall(int key, t_mlx *mlx)
 
 	stat = 1;
 	if (mlx->ptr2obj->count == 1)
-		to_camera(key, mlx->ptr2obj, &stat);
+		to_camera(key, mlx->ptr2obj);
 	else if (mlx->ptr2obj->count == 2)
-		to_light(key, mlx->ptr2obj->light, &stat);
+		to_light(key, mlx->ptr2obj->light);
 	else if (mlx->ptr2obj->count == 3)
-		to_ambient(key, mlx->ptr2obj->ambient, &stat);
+		to_ambient(key, mlx->ptr2obj->ambient);
 	else if (mlx->ptr2obj->count == 4)
 		to_shape(key, mlx->ptr2obj, &stat);
 	if (stat)

@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 08:27:53 by pruangde          #+#    #+#             */
-/*   Updated: 2023/09/22 11:56:01 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/09/22 14:34:04 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	rotate_cam(int key, t_ptr2obj *ptr)
 	}
 }
 
-void	to_camera(int key, t_ptr2obj *ptr2obj, int *stat)
+void	to_camera(int key, t_ptr2obj *ptr2obj)
 {
 	if (key == KEY_W || key == KEY_A || key == KEY_S || key == KEY_D 
 		|| key == KEY_Q || key == KEY_E)

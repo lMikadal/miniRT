@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 03:46:46 by pruangde          #+#    #+#             */
-/*   Updated: 2023/09/22 13:57:31 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/09/22 16:26:53 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	err_key(int mode);
 void	select_nextobj(t_mlx *mlx);
 void	what_shape(t_ptr2obj *ptr2obj);
 
-void	to_camera(int key, t_ptr2obj *ptr2obj, int *stat);
-void	to_light(int key, t_light *lgt, int *stat);
-void	to_ambient(int key, t_ambient *amb, int *stat);
+void	to_camera(int key, t_ptr2obj *ptr2obj);
+void	to_light(int key, t_light *lgt);
+void	to_ambient(int key, t_ambient *amb);
 void	to_shape(int key, t_ptr2obj *ptr2obj, int *stat);
 
 int		to_sphere(int key, t_sphere *sp);
@@ -51,6 +51,7 @@ int		to_cylinder(int key, t_cylinder *cy);
 void	cam_yaw_left(t_camera *cam);
 void	cam_yaw_right(t_camera *cam);
 void	reset_camera(t_camera *cam);
+void	rotatecam_updown(int key, t_camera *cam);
 
 // plane
 
