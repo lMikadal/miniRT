@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 04:02:21 by pruangde          #+#    #+#             */
-/*   Updated: 2023/09/18 15:31:34 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/09/22 13:54:30 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,10 @@ void	to_shape(int key, t_ptr2obj *ptr2obj, int *stat)
 {
 	if (ptr2obj->hitlist->type == SP)
 		*stat = to_sphere(key, ptr2obj->hitlist->sphere);
-	// else if (ptr2obj->hitlist->type == PL)
-	// 	*stat = to_plane(key, ptr2obj->hitlist->plane, stat);
-	// else if (ptr2obj->hitlist->type == CY)
-	// 	*stat = to_cylinder(key, ptr2obj->hitlist->cylinder, stat);
+	else if (ptr2obj->hitlist->type == PL)
+		*stat = to_plane(key, ptr2obj->hitlist->plane);
+	else if (ptr2obj->hitlist->type == CY)
+		*stat = to_cylinder(key, ptr2obj->hitlist->cylinder);
 }
 
 void	to_keyhall(int key, t_mlx *mlx)

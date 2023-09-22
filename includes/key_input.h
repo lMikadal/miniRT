@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 03:46:46 by pruangde          #+#    #+#             */
-/*   Updated: 2023/09/22 03:00:18 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/09/22 13:57:31 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ typedef struct s_r2d
 	t_v2d	direction;
 }			t_r2d;
 
+// vec 2D
+double	v2d_dot(t_v2d a, t_v2d b);
+double	v2d_length(t_v2d v);
+t_v2d	v2d_create(double x, double y);
+t_v2d	v2d_rotate(t_v2d v, double degree);
+
 
 int		cx_validkey(int key);
 void	to_keyhall(int key, t_mlx *mlx);
@@ -37,20 +43,18 @@ void	to_light(int key, t_light *lgt, int *stat);
 void	to_ambient(int key, t_ambient *amb, int *stat);
 void	to_shape(int key, t_ptr2obj *ptr2obj, int *stat);
 
+int		to_sphere(int key, t_sphere *sp);
+int		to_plane(int key, t_plane *pl);
+int		to_cylinder(int key, t_cylinder *cy);
+
 // camera
 void	cam_yaw_left(t_camera *cam);
 void	cam_yaw_right(t_camera *cam);
-void	rotatecam_updown(int key, t_ptr2obj *ptr, int *stat);
-int		normal_vec_zx_zero(t_v3d cam);
-void	reset_camera(t_camera *cam, int *stat);
+void	reset_camera(t_camera *cam);
 
+// plane
 
-// shape
-//	sphere
-int		to_sphere(int key, t_sphere *sp);
-
-
-// formula related
-
+// cylinder
+void	cy_rotate(int key, t_cylinder *cy);
 
 #endif

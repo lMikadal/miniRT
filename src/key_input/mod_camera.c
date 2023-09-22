@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 08:27:53 by pruangde          #+#    #+#             */
-/*   Updated: 2023/09/18 15:44:33 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/09/22 11:56:01 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ static void	move_cam_pos(int key, t_camera *cam)
 	if (key == KEY_W)
 		cam->coordinates_point.z += 0.2;
 	else if (key == KEY_A)
-		cam->coordinates_point.x -= 0.2;
+		cam->coordinates_point.x += 0.2;
 	else if (key == KEY_S)
 		cam->coordinates_point.z -= 0.2;
 	else if (key == KEY_D)
-		cam->coordinates_point.x += 0.2;
+		cam->coordinates_point.x -= 0.2;
 	else if (key == KEY_Q)
 		cam->coordinates_point.y += 0.2;
 	else if (key == KEY_E)
@@ -40,17 +40,12 @@ static void	wide_cam(int key, t_camera *cam)
 		cam->fov = 170.0;
 }
 
-static void	rotate_cam(int key, t_ptr2obj *ptr, int *stat)
+static void	rotate_cam(int key, t_ptr2obj *ptr)
 {
 	if (key == KEY_ARR_UP || key == KEY_ARR_DOWN)
-		rotatecam_updown(key, ptr, stat);
+		rotatecam_updown(key, ptr->camera);
 	else if (key == KEY_ARR_LEFT || key == KEY_ARR_RIGHT)
 	{
-		if (normal_vec_zx_zero(ptr->camera->normalized_vector))
-		{
-			*stat = 0;
-			return ;
-		}
 		if (key == KEY_ARR_LEFT)
 			cam_yaw_left(ptr->camera);
 		else if (key == KEY_ARR_RIGHT)
@@ -60,25 +55,15 @@ static void	rotate_cam(int key, t_ptr2obj *ptr, int *stat)
 
 void	to_camera(int key, t_ptr2obj *ptr2obj, int *stat)
 {
-	t_v3d	tmp_prev;
-
-	v3d_copy2(ptr2obj->camera->normalized_vector, &tmp_prev);
 	if (key == KEY_W || key == KEY_A || key == KEY_S || key == KEY_D 
 		|| key == KEY_Q || key == KEY_E)
 		move_cam_pos(key, ptr2obj->camera);
 	else if (key == KEY_ARR_UP || key == KEY_ARR_LEFT || key == KEY_ARR_DOWN 
 		|| key == KEY_ARR_RIGHT)
-		rotate_cam(key, ptr2obj, stat);
+		rotate_cam(key, ptr2obj);
 	else if (key == KEY_Z || key == KEY_X)
 		wide_cam(key, ptr2obj->camera);
 	else if (key == KEY_R)
-		reset_camera(ptr2obj->camera, stat);
-	else
-	{
-		err_key(2);
-		*stat = 0;
-	}
-	if (*stat)
-		v3d_copy2(tmp_prev, &ptr2obj->prev_cam);
+		reset_camera(ptr2obj->camera);
 }
 
