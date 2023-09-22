@@ -18,6 +18,8 @@ int		plane(t_ray r, double t_max, t_hit_record *rec, t_plane *pl);
 int		h_c(double t, t_cylinder *cy, \
 			t_hit_record *rec, double denom);
 t_v3d	find_t_dot(double dot, t_cylinder *cy, t_v3d tb[]);
+int		check_top_bottom(double t_t, double t_b, int *flag, double *t);
+int		set_cap_top_bottom(t_ray r, double t, t_v3d cap, t_cylinder *cy);
 int		cylinder(t_ray r, double t_max, t_hit_record *rec, t_cylinder *cy);
 int		set_rec(t_hit_record *rec, double t, t_rgb color);
 
