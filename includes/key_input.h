@@ -31,7 +31,6 @@ double	v2d_length(t_v2d v);
 t_v2d	v2d_create(double x, double y);
 t_v2d	v2d_rotate(t_v2d v, double degree);
 
-
 int		cx_validkey(int key);
 void	to_keyhall(int key, t_mlx *mlx);
 void	err_key(int mode);
@@ -54,6 +53,7 @@ void	reset_camera(t_camera *cam);
 void	rotatecam_updown(int key, t_camera *cam);
 
 // plane
+void	pl_rotate(int key, t_plane *pl);
 
 // cylinder
 void	cy_rotate(int key, t_cylinder *cy);

@@ -14,26 +14,24 @@
 
 void	cam_yaw_right(t_camera *cam)
 {
-	t_v2d rot;
+	t_v2d	rot;
 
 	rot = v2d_create(cam->normalized_vector.x, cam->normalized_vector.z);
 	rot = v2d_rotate(rot, 30.0);
 	cam->normalized_vector.x = rot.x;
 	cam->normalized_vector.z = rot.y;
 	cam->normalized_vector = v3d_unit_vec(cam->normalized_vector);
-
 }
 
 void	cam_yaw_left(t_camera *cam)
 {
-	t_v2d rot;
+	t_v2d	rot;
 
 	rot = v2d_create(cam->normalized_vector.x, cam->normalized_vector.z);
 	rot = v2d_rotate(rot, -30.0);
 	cam->normalized_vector.x = rot.x;
 	cam->normalized_vector.z = rot.y;
 	cam->normalized_vector = v3d_unit_vec(cam->normalized_vector);
-
 }
 
 static void	cam_rotate_updown(t_camera *cam, double angle)

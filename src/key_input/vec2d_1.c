@@ -38,11 +38,18 @@ t_v2d	v2d_rotate(t_v2d v, double degree)
 	double	sine;
 	double	cosine;
 
-
 	rad = degree * (PI / 180);
 	sine = sin(rad);
 	cosine = cos(rad);
 	rot.x = v.x * cosine - v.y * sine;
 	rot.y = v.x * sine + v.y * cosine;
 	return (rot);
+}
+
+void	err_key(int mode)
+{
+	if (mode == 1)
+		printf("Invalid key\n");
+	else if (mode == 2)
+		printf("Invalid key for selected object\n");
 }

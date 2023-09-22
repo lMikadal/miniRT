@@ -57,3 +57,17 @@ void	to_ambient(int key, t_ambient *amb)
 	else if (amb->ratio > 1.0)
 		amb->ratio = 1.0;
 }
+
+int	to_plane(int key, t_plane *pl)
+{
+	if (key == KEY_Q)
+		pl->coordinates_point.y += 0.2;
+	else if (key == KEY_E)
+		pl->coordinates_point.y -= 0.2;
+	else if (key == KEY_ARR_UP || key == KEY_ARR_DOWN
+		|| key == KEY_ARR_LEFT || key == KEY_ARR_RIGHT)
+		pl_rotate(key, pl);
+	else if (key == KEY_R)
+		pl->normalized_vector = v3d_unit_vec(v3d_create(0, 1, 0));
+	return (1);
+}

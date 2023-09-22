@@ -17,7 +17,8 @@ int	cx_validkey(int key)
 {
 	if (key == KEY_W || key == KEY_A || key == KEY_S || key == KEY_D)
 		return (1);
-	else if (key == KEY_Q || key == KEY_E || key == KEY_L_BRAC || key == KEY_R_BRAC)
+	else if (key == KEY_Q || key == KEY_E
+		|| key == KEY_L_BRAC || key == KEY_R_BRAC)
 		return (1);
 	else if (key == KEY_Z || key == KEY_X || key == KEY_C || key == KEY_V)
 		return (1);
@@ -28,14 +29,6 @@ int	cx_validkey(int key)
 	else if (key == KEY_R)
 		return (1);
 	return (0);
-}	
-
-void	err_key(int mode)
-{
-	if (mode == 1)
-		printf("Invalid key\n");
-	else if (mode == 2)
-		printf("Invalid key for selected object\n");
 }
 
 // mode 1 print current object
@@ -66,7 +59,7 @@ void	select_nextobj(t_mlx *mlx)
 	{
 		mlx->ptr2obj->hitlist = mlx->ptr2obj->hitlist->next;
 		if (mlx->ptr2obj->hitlist == NULL)
-		{	
+		{
 			mlx->ptr2obj->hitlist = mlx->info->hittable_list;
 			mlx->ptr2obj->count = 1;
 		}

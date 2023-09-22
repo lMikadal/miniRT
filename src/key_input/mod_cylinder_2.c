@@ -14,7 +14,7 @@
 
 static void	cy_yaw_right(t_cylinder *cy)
 {
-	t_v2d rot;
+	t_v2d	rot;
 
 	rot = v2d_create(cy->normalized_vector.x, cy->normalized_vector.z);
 	rot = v2d_rotate(rot, 30.0);
@@ -25,7 +25,7 @@ static void	cy_yaw_right(t_cylinder *cy)
 
 static void	cy_yaw_left(t_cylinder *cy)
 {
-	t_v2d rot;
+	t_v2d	rot;
 
 	rot = v2d_create(cy->normalized_vector.x, cy->normalized_vector.z);
 	rot = v2d_rotate(rot, -30.0);

@@ -55,10 +55,10 @@ static void	rotate_cam(int key, t_ptr2obj *ptr)
 
 void	to_camera(int key, t_ptr2obj *ptr2obj)
 {
-	if (key == KEY_W || key == KEY_A || key == KEY_S || key == KEY_D 
+	if (key == KEY_W || key == KEY_A || key == KEY_S || key == KEY_D
 		|| key == KEY_Q || key == KEY_E)
 		move_cam_pos(key, ptr2obj->camera);
-	else if (key == KEY_ARR_UP || key == KEY_ARR_LEFT || key == KEY_ARR_DOWN 
+	else if (key == KEY_ARR_UP || key == KEY_ARR_LEFT || key == KEY_ARR_DOWN
 		|| key == KEY_ARR_RIGHT)
 		rotate_cam(key, ptr2obj);
 	else if (key == KEY_Z || key == KEY_X)
@@ -66,4 +66,3 @@ void	to_camera(int key, t_ptr2obj *ptr2obj)
 	else if (key == KEY_R)
 		reset_camera(ptr2obj->camera);
 }
-
